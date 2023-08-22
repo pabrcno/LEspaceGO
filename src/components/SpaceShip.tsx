@@ -29,7 +29,7 @@ export function SpaceShip(): JSX.Element {
 
     mainBoxRef.current.position.set(
       mouse.x * width * 0.1,
-      mouse.y * height * 0.1 - 0.1,
+      mouse.y * height * 0.1,
       camera.position.z - 1
     );
     // Update lasers position
