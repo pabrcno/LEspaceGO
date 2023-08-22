@@ -1,10 +1,10 @@
 import { createGlobalStyle } from "styled-components";
-import Lobster from "../../assets/fonts/Lobster-Regular.ttf";
+import VCR from "../../assets/fonts/VCR.ttf";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-family: 'Lobster';
-    src: url(${Lobster}) format('truetype');
+    font-family: 'VCR';
+    src: url(${VCR}) format('truetype');
     font-weight: 300;
     font-style: normal;
     font-display: auto; 
@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: #000;
     overflow-x: hidden;
     overflow-y: hidden;
-    font-family: 'Lobster', cursive;
+    font-family: 'VCR', sans-serif;
  
   }
 `;

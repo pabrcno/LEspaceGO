@@ -51,7 +51,7 @@ export function Alien(props: JSX.IntrinsicElements["group"]) {
           scene.remove(laser);
           setTimeout(() => {
             alienRef.current?.parent?.remove(alienRef.current);
-          }, 2000);
+          }, 1000);
 
           break;
         }

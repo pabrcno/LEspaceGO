@@ -31,6 +31,7 @@ export const Background = ({ meshes }: meshBackgroundProps) => {
 
   return (
     <group>
+      <directionalLight intensity={1} />
       {positionedMeshes.map((mesh, index) => (
         <Float
           speed={speed}
@@ -42,7 +43,7 @@ export const Background = ({ meshes }: meshBackgroundProps) => {
           {mesh}
         </Float>
       ))}
-      <ambientLight />
+      <ambientLight intensity={0.5} />
       <Sparkles
         position={[0, 0, camera.position.z - 10]}
         size={3}

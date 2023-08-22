@@ -37,7 +37,7 @@ export const MainScreen = () => {
   const { theme } = useTheme();
   const audioRef = useRef<HTMLAudioElement>(null);
   const audioMelodyRef = useRef<HTMLAudioElement>(null);
-  const [gameCount, setGameCount] = useState(0);
+
   const {
     bgMeshScale,
     bgMeshFactor,
@@ -74,7 +74,7 @@ export const MainScreen = () => {
           <Suspense fallback={null}>
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
-            <Float rotation={[0, Math.PI, 0]}>
+            <Float rotation={[Math.PI / 16, Math.PI, 0]}>
               <Lego2x2
                 position={[0, 0, 0]}
                 scale={[0.5, 0.5, 0.5]}
@@ -84,7 +84,18 @@ export const MainScreen = () => {
             <Sparkles position={[0, 0, 1]} />
           </Suspense>
         </Canvas>
-
+        <h1
+          style={{
+            position: "absolute",
+            top: "20%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            color: "white",
+            fontSize: "5rem",
+          }}
+        >
+          LESPACEGO
+        </h1>
         <StartButton onClick={() => setIsStarted(true)}>Start</StartButton>
       </div>
     );
@@ -146,9 +157,6 @@ export const MainScreen = () => {
 
           <audio ref={audioRef} loop>
             <source src="/sound/background.wav" type="audio/mpeg" />
-          </audio>
-          <audio ref={audioMelodyRef} loop>
-            <source src="/sound/background-melody.mp3" type="audio/mpeg" />
           </audio>
         </>
       }
