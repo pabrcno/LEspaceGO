@@ -52,8 +52,8 @@ export const MainScreen = () => {
   const [isStarted, setIsStarted] = useState(false);
   useEffect(() => {
     if (!audioRef.current || !audioMelodyRef.current) return;
-    audioRef.current.volume = 0.01;
-    audioMelodyRef.current.volume = 0.1;
+    audioRef.current.volume = 0.5;
+    audioMelodyRef.current.volume = 0.025;
     audioRef.current.play().catch((err) => console.error(err));
     audioMelodyRef.current.play().catch((err) => console.error(err));
   }, [isStarted]); //
