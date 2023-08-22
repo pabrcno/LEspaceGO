@@ -9,6 +9,7 @@ import { GLTF } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
 import { Explosion } from "../Explosion";
 import { a, useSpring } from "@react-spring/three";
+import { Lego1x1, Lego2x2 } from ".";
 type GLTFResult = GLTF & {
   nodes: {
     Object_1: THREE.Mesh;
@@ -72,6 +73,22 @@ export function Alien(props: JSX.IntrinsicElements["group"]) {
         <mesh geometry={nodes.Object_1_2.geometry} material={materials.Glass} />
       </a.group>
       <a.group scale={explosionScale as unknown as THREE.Vector3}>
+        <Lego1x1
+          color="#505050"
+          position={[2, -2, 0]}
+          scale={[0.5, 0.5, 0.5]}
+        />
+        <Lego2x2
+          color="#aaffaa"
+          position={[-1, 1, 0]}
+          scale={[0.5, 0.5, 0.5]}
+        />
+        <Lego1x1 color="#aaffaa" position={[1, 2, 0]} scale={[0.5, 0.5, 0.5]} />
+        <Lego2x2
+          color="#505050"
+          position={[-2, -2, 0]}
+          scale={[0.5, 0.5, 0.5]}
+        />
         <Explosion />
       </a.group>
     </group>
