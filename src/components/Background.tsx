@@ -27,7 +27,7 @@ export const Background = ({ meshes }: meshBackgroundProps) => {
 
   const { camera } = useThree();
 
-  const cameraFactor = Math.abs(camera.position.z * 0.5) + 2;
+  const cameraFactor = Math.abs(camera.position.z) + 2;
 
   return (
     <group>
