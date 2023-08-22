@@ -33,7 +33,7 @@ export function Alien(props: JSX.IntrinsicElements["group"]) {
     config: { duration: 500, tension: 1000, friction: 5000 }, // Duration of animation
   });
   const explosionAudio = useMemo(() => new Audio("/sound/explosion.wav"), []);
-
+  explosionAudio.volume = 0.5;
   useFrame(({ scene }) => {
     // If already hit, no need to check further
     if (isHit) return;

@@ -11,7 +11,7 @@ export enum ETheme {
 export const useTheme = () => {
   const theme = {
     name: ETheme.LEGOS,
-    innerGradientColor: "#191716",
+    innerGradientColor: "#101010",
     outerGradientColor: "#000",
     // values of legos but twice to have more legos
     meshes: Object.values(legos),
