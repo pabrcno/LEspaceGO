@@ -1,7 +1,7 @@
 import { Background } from "../../components/Background";
 import { Canvas } from "@react-three/fiber";
 
-import { Float, Loader, Sparkles, Stats } from "@react-three/drei";
+import { Float, Loader, Sparkles } from "@react-three/drei";
 
 import { ScreenContainer } from "../../styles/general.styles";
 
@@ -129,7 +129,6 @@ export const MainScreen = () => {
             }}
           >
             <Suspense fallback={null}>
-              <Stats />
               <fog attach="fog" args={[shadowColor, 8, 11]} />
 
               <SpaceShip />
