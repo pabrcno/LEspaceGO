@@ -43,7 +43,7 @@ export const Background = ({ meshes }: meshBackgroundProps) => {
           {mesh}
         </Float>
       ))}
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.3} />
       <Sparkles
         position={[0, 0, camera.position.z - 10]}
         size={3}

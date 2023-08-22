@@ -40,8 +40,8 @@ export const useMeshBackgroundPositioning = (meshes: JSX.Element[]) => {
     const newPositions = positions.map(([x, y, z]) => {
       if (camera.position.z < z) {
         return [
-          x + (Math.random() - 0.5) * 2.5,
-          y + (Math.random() - 0.5) * 2.5,
+          x + (Math.random() - 0.5) * -1.5,
+          y + (Math.random() - 0.5) * -1.5,
           camera.position.z - (Math.random() - 0.5) * 2.5 - THRESHOLD,
         ];
       } else if (z < camera.position.z - THRESHOLD) {

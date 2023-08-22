@@ -35,7 +35,7 @@ export function Alien(props: JSX.IntrinsicElements["group"]) {
   });
   const explosionAudio = useMemo(() => new Audio("/sound/explosion.wav"), []);
   explosionAudio.volume = 0.5;
-  useFrame(({ scene }) => {
+  useFrame(({ scene, camera }) => {
     // If already hit, no need to check further
     if (isHit) return;
 
@@ -49,9 +49,20 @@ export function Alien(props: JSX.IntrinsicElements["group"]) {
           setIsHit(true);
 
           scene.remove(laser);
+
           setTimeout(() => {
-            alienRef.current?.parent?.remove(alienRef.current);
+            if (!alienRef.current) return;
+
+            alienRef.current.visible = false;
+            alienRef.current.position.set(0, 0, camera.position.z - 20);
           }, 1000);
+
+          setTimeout(() => {
+            if (!alienRef.current) return;
+
+            alienRef.current.visible = true;
+            setIsHit(false);
+          }, 2000);
 
           break;
         }
