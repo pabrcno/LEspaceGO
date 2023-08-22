@@ -10,23 +10,12 @@ type GLTFResult = GLTF & {
     blue_and_green_planet: THREE.MeshStandardMaterial;
   };
 };
-const textureUris = [
-  "/textures/Planet_Caves.jpg",
-  "/textures/Planet_City.jpg",
-  "/textures/Planet_Cliffs.jpg",
-  "/textures/Planet_Desert.jpg",
-  "/textures/Planet_Forest.jpg",
-  "/textures/Planet_Ice.jpg",
-  "/textures/Planet_Lava.jpg",
-  "/textures/Planet_Lava.jpg",
-  "/textures/Planet_Snow.jpg",
-  "/textures/Planet_TropicalValley.jpg",
-];
-export function Planet(props: JSX.IntrinsicElements["group"]) {
+
+export function Planet(
+  props: JSX.IntrinsicElements["group"] & { textureUri: string }
+) {
   const { nodes, materials } = useGLTF("/meshes/planet.glb") as GLTFResult;
-  const texture = useTexture(
-    textureUris[Math.floor(Math.random() * textureUris.length)]
-  );
+  const texture = useTexture(props.textureUri);
   const clonedMaterial = materials["blue_and_green_planet"].clone();
 
   // Update the material's color if a color prop is provided
