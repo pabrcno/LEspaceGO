@@ -37,6 +37,7 @@ export const MainScreen = () => {
   const { theme } = useTheme();
   const audioRef = useRef<HTMLAudioElement>(null);
   const audioMelodyRef = useRef<HTMLAudioElement>(null);
+  const [gameCount, setGameCount] = useState(0);
   const {
     bgMeshScale,
     bgMeshFactor,
