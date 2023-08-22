@@ -120,6 +120,7 @@ export const MainScreen = () => {
     <ScreenContainer>
       {
         <>
+          <Loader />
           <Canvas
             style={{
               height: "100vh",
