@@ -1,7 +1,7 @@
 import { useSpring } from "@react-spring/three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
-
+import { debounce } from "lodash";
 export const useAutoZScrolling = (deactivateScroll?: boolean) => {
   const { camera } = useThree();
   const lastY = useRef(0);
@@ -19,30 +19,34 @@ export const useAutoZScrolling = (deactivateScroll?: boolean) => {
   const speedAudio = useMemo(() => new Audio("/sound/speed.wav"), []);
   const [played, setPlayed] = useState(false);
   const [keyDown, setKeyDown] = useState(false); // New state to track if key is currently down
-
+  speedAudio.volume = 0.1;
   useEffect(() => {
-    speedAudio.volume = 0.1;
+    const debouncedOnKeyDown = debounce(() => {
+      // Mark the key as down
+      setKeyDown(true);
+
+      // Play the speed sound
+      if (!played) {
+        setPlayed(true);
+        speedAudio.play().catch(() => {
+          console.log("Failed to play speed sound");
+        });
+      }
+
+      // Set the spring to the faster speed
+      setSpeed({ speed: 0.25 });
+    }, 200);
+
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Shift" && !keyDown) {
-        // Add the check for keyDown
-        // Mark the key as down
-        setKeyDown(true);
-
-        // Play the speed sound
-        if (!played) {
-          setPlayed(true);
-          speedAudio.play().catch(() => {
-            console.log("Failed to play speed sound");
-          });
-        }
-
-        // Set the spring to the faster speed
-        setSpeed({ speed: 0.25 });
+        debouncedOnKeyDown();
       }
     };
 
     const onKeyUp = (e: KeyboardEvent) => {
       if (e.key === "Shift") {
+        debouncedOnKeyDown.cancel(); // Cancel any pending debounced call
+
         // Mark the key as up
         setKeyDown(false);
 

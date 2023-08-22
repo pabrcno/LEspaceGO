@@ -11,6 +11,7 @@ import { Planet } from "../../components/legos/Planet";
 import { Alien } from "../../components/legos/Alien";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { Lego2x2 } from "../../components/legos";
+import { StartButton } from "./main.styles";
 const colors = [
   "#B40000",
   "#FCAC00",
@@ -83,24 +84,7 @@ export const MainScreen = () => {
           </Suspense>
         </Canvas>
 
-        <button
-          style={{
-            position: "absolute",
-            bottom: "10%",
-            left: "50%",
-            transform: "translateX(-50%)",
-            padding: "10px 50px",
-            fontSize: "2rem",
-            cursor: "pointer",
-            background: "transparent",
-            color: "white",
-            border: "2px solid white",
-            borderRadius: "10px",
-          }}
-          onClick={() => setIsStarted(true)}
-        >
-          Start
-        </button>
+        <StartButton onClick={() => setIsStarted(true)}>Start</StartButton>
       </div>
     );
   }
@@ -150,7 +134,7 @@ export const MainScreen = () => {
                     />
                   )),
 
-                  ...Array.from({ length: 60 }, (_, factorIndex) => (
+                  ...Array.from({ length: 30 }, (_, factorIndex) => (
                     <Alien
                       key={`${factorIndex}-alien`}
                       scale={bgMeshScale / 1.5}
@@ -160,7 +144,6 @@ export const MainScreen = () => {
               />
             </Suspense>
           </Canvas>
-          <Loader />
 
           <audio ref={audioRef} loop>
             <source src="/sound/background.wav" type="audio/mpeg" />

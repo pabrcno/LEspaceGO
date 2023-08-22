@@ -13,3 +13,17 @@ export const ControlsContainer = styled.div`
   padding: 20;
   cursor: pointer;
 `;
+
+export const StartButton = styled.button`
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 50px;
+  fontsize: 2rem;
+  cursor: pointer;
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  borderradius: 10px;
+`;
