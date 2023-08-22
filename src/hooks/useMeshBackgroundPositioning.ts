@@ -14,7 +14,7 @@ export const useMeshBackgroundPositioning = (meshes: JSX.Element[]) => {
     return [
       (Math.random() - 0.5) * MAX_RANGE,
       (Math.random() - 0.5) * MAX_RANGE_Y,
-      (Math.random() - 1) * 10,
+      (Math.random() - 0.5) * 10,
     ] as [number, number, number];
   }
 
