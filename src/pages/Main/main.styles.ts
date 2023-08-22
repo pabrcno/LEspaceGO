@@ -14,6 +14,10 @@ export const ControlsContainer = styled.div`
   cursor: pointer;
   border-radius: 20px;
   padding: 10px 50px;
+  @media (max-width: 768px) {
+    z-index: -1;
+    opacity: 0;
+  }
 `;
 
 export const StartButton = styled.button`
@@ -45,4 +49,8 @@ export const HintContainer = styled.div`
   color: white;
 
   border-radius: 20px;
+  @media (max-width: 768px) {
+    z-index: -1;
+    opacity: 0;
+  }
 `;

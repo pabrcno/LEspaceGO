@@ -36,7 +36,6 @@ const textureUris = [
 export const MainScreen = () => {
   const { theme } = useTheme();
   const audioRef = useRef<HTMLAudioElement>(null);
-  const audioMelodyRef = useRef<HTMLAudioElement>(null);
 
   const {
     bgMeshScale,
@@ -53,7 +52,7 @@ export const MainScreen = () => {
   };
   const [isStarted, setIsStarted] = useState(false);
   useEffect(() => {
-    if (!audioRef.current || !audioMelodyRef.current) return;
+    if (!audioRef.current) return;
     audioRef.current.volume = 1;
 
     audioRef.current.play().catch((err) => console.error(err));
