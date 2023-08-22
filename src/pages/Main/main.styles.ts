@@ -47,7 +47,8 @@ export const HintContainer = styled.div`
 
   background: transparent;
   color: white;
-
+  rotate: 180deg;
+  opacity: 0.5;
   border-radius: 20px;
   @media (max-width: 768px) {
     z-index: -1;
