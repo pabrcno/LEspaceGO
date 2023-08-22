@@ -36,18 +36,6 @@ export const MainScreen = () => {
     "#D05098",
   ];
 
-  const textureUris = [
-    "/textures/Planet_Caves.jpg",
-    "/textures/Planet_City.jpg",
-    "/textures/Planet_Cliffs.jpg",
-    "/textures/Planet_Desert.jpg",
-    "/textures/Planet_Forest.jpg",
-    "/textures/Planet_Ice.jpg",
-    "/textures/Planet_Lava.jpg",
-    "/textures/Planet_Lava.jpg",
-    "/textures/Planet_Snow.jpg",
-    "/textures/Planet_TropicalValley.jpg",
-  ];
   return (
     <ScreenContainer>
       <Canvas
@@ -69,25 +57,26 @@ export const MainScreen = () => {
               ...Array.from({ length: bgMeshFactor }, (_, factorIndex) => (
                 <Mesh
                   key={`${index}-${factorIndex}`}
-                  scale={bgMeshScale * 0.2}
+                  scale={[
+                    bgMeshScale * 0.2,
+                    bgMeshScale * 0.2,
+                    bgMeshScale * 0.2,
+                  ]}
                   color={colors[Math.floor(Math.random() * colors.length)]}
-                  textureUri={
-                    textureUris[Math.floor(Math.random() * textureUris.length)]
-                  }
                 />
               )),
-              ...textureUris.map((texture, textureIndex) => (
+
+              ...Array.from({ length: 8 }, (_, factorIndex) => (
                 <Planet
-                  key={`${index}-${textureIndex}-planet`}
+                  key={`${index}-${factorIndex}-planet`}
                   scale={bgMeshScale}
-                  textureUri={texture}
                 />
               )),
 
               ...Array.from({ length: 24 }, (_, factorIndex) => (
                 <Alien
                   key={`${index}-${factorIndex}-alien`}
-                  scale={bgMeshScale}
+                  scale={bgMeshScale / 1.5}
                 />
               )),
             ])}
