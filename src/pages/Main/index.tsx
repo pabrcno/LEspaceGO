@@ -10,7 +10,7 @@ import { SpaceShip } from "../../components/SpaceShip";
 import { Planet } from "../../components/legos/Planet";
 import { Alien } from "../../components/legos/Alien";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { Lego4x2 } from "../../components/legos";
+import { Lego2x2 } from "../../components/legos";
 const colors = [
   "#B40000",
   "#FCAC00",
@@ -44,7 +44,7 @@ export const MainScreen = () => {
     shadowColor,
   } = {
     bgMeshScale: 0.1,
-    bgMeshFactor: 15,
+    bgMeshFactor: 30,
     innerGradientColor: theme.innerGradientColor,
     outerGradientColor: theme.outerGradientColor,
     shadowColor: theme.shadowColor,
@@ -53,9 +53,8 @@ export const MainScreen = () => {
   useEffect(() => {
     if (!audioRef.current || !audioMelodyRef.current) return;
     audioRef.current.volume = 0.5;
-    audioMelodyRef.current.volume = 0.025;
+
     audioRef.current.play().catch((err) => console.error(err));
-    audioMelodyRef.current.play().catch((err) => console.error(err));
   }, [isStarted]); //
 
   if (!isStarted) {
@@ -73,11 +72,11 @@ export const MainScreen = () => {
           <Suspense fallback={null}>
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
-            <Float>
-              <Lego4x2
+            <Float rotation={[0, Math.PI, 0]}>
+              <Lego2x2
                 position={[0, 0, 0]}
                 scale={[0.5, 0.5, 0.5]}
-                color="blue"
+                color={colors[Math.floor(Math.random() * colors.length)]}
               />
             </Float>
             <Sparkles position={[0, 0, 1]} />
@@ -90,8 +89,13 @@ export const MainScreen = () => {
             bottom: "10%",
             left: "50%",
             transform: "translateX(-50%)",
-            padding: "10px 20px",
-            fontSize: "1.2rem",
+            padding: "10px 50px",
+            fontSize: "2rem",
+            cursor: "pointer",
+            background: "transparent",
+            color: "white",
+            border: "2px solid white",
+            borderRadius: "10px",
           }}
           onClick={() => setIsStarted(true)}
         >
@@ -114,45 +118,50 @@ export const MainScreen = () => {
             <Suspense fallback={null}>
               <Stats />
               <fog attach="fog" args={[shadowColor, 8, 11]} />
-              <directionalLight intensity={1} />
 
               <SpaceShip />
 
               <Background
-                meshes={theme.meshes.flatMap((Mesh, index) => [
-                  ...Array.from({ length: bgMeshFactor }, (_, factorIndex) => (
-                    <Mesh
-                      key={`${index}-${factorIndex}`}
-                      scale={[
-                        bgMeshScale * 0.3,
-                        bgMeshScale * 0.3,
-                        bgMeshScale * 0.3,
-                      ]}
-                      color={colors[Math.floor(Math.random() * colors.length)]}
-                    />
-                  )),
+                meshes={[
+                  ...theme.meshes.flatMap((Mesh, index) => [
+                    ...Array.from(
+                      { length: bgMeshFactor },
+                      (_, factorIndex) => (
+                        <Mesh
+                          key={`${index}-${factorIndex}`}
+                          scale={[
+                            bgMeshScale * 0.3,
+                            bgMeshScale * 0.3,
+                            bgMeshScale * 0.3,
+                          ]}
+                          color={
+                            colors[Math.floor(Math.random() * colors.length)]
+                          }
+                        />
+                      )
+                    ),
+                  ]),
+
                   ...textureUris.map((texture, textureIndex) => (
                     <Planet
-                      key={`${index}-${textureIndex}-planet`}
+                      key={`${textureIndex}-planet`}
                       scale={bgMeshScale}
                       textureUri={texture}
                     />
                   )),
 
-                  ...Array.from({ length: 12 }, (_, factorIndex) => (
+                  ...Array.from({ length: 40 }, (_, factorIndex) => (
                     <Alien
-                      key={`${index}-${factorIndex}-alien`}
+                      key={`${factorIndex}-alien`}
                       scale={bgMeshScale / 1.5}
                     />
                   )),
-                ])}
+                ]}
               />
             </Suspense>
           </Canvas>
           <Loader />
-          {/* <ControlsContainer>
-        <Controls />
-      </ControlsContainer> */}
+
           <audio ref={audioRef} loop>
             <source src="/sound/background.wav" type="audio/mpeg" />
           </audio>

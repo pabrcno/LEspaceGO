@@ -31,7 +31,7 @@ export function Alien(props: JSX.IntrinsicElements["group"]) {
   const { alienScale, explosionScale } = useSpring({
     alienScale: isHit ? [0, 0, 0] : [1, 1, 1], // Shrinking effect
     explosionScale: isHit ? [1, 1, 1] : [0, 0, 0], // Explosion effect
-    config: { duration: 500, tension: 1000, friction: 5000 }, // Duration of animation
+    config: { duration: 500 }, // Duration of animation
   });
   const explosionAudio = useMemo(() => new Audio("/sound/explosion.wav"), []);
   explosionAudio.volume = 0.5;
@@ -51,7 +51,7 @@ export function Alien(props: JSX.IntrinsicElements["group"]) {
           scene.remove(laser);
           setTimeout(() => {
             alienRef.current?.parent?.remove(alienRef.current);
-          }, 2000);
+          }, 3000);
 
           break;
         }

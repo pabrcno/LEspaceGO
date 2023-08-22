@@ -26,7 +26,7 @@ export function Planet(
   return (
     <group {...props} dispose={null}>
       <AnimatedLegoWrapper>
-        <mesh castShadow receiveShadow geometry={nodes.planet_lego.geometry}>
+        <mesh geometry={nodes.planet_lego.geometry}>
           <meshStandardMaterial map={texture} />
         </mesh>
       </AnimatedLegoWrapper>

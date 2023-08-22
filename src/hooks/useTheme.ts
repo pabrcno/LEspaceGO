@@ -14,7 +14,7 @@ export const useTheme = () => {
     innerGradientColor: "#101010",
     outerGradientColor: "#000",
     // values of legos but twice to have more legos
-    meshes: Object.values(legos),
+    meshes: Object.values(legos).flatMap((lego) => [lego]),
     title: "",
     shadowColor: "#202020",
   };
