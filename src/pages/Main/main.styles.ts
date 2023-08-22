@@ -62,7 +62,7 @@ export const TitleContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-size: 3rem;
+  font-size: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
