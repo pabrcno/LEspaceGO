@@ -63,21 +63,25 @@ export const MainScreen = () => {
       <div
         style={{ position: "relative", height: "100vh", overflow: "hidden" }}
       >
+        <Loader />
+
         <Canvas
           style={{
             background: `radial-gradient(circle, ${innerGradientColor}, ${outerGradientColor})`,
           }}
         >
-          <ambientLight />
-          <pointLight position={[10, 10, 10]} />
-          <Float>
-            <Lego4x2
-              position={[0, 0, 0]}
-              scale={[0.5, 0.5, 0.5]}
-              color="blue"
-            />
-          </Float>
-          <Sparkles position={[0, 0, 1]} />
+          <Suspense fallback={null}>
+            <ambientLight />
+            <pointLight position={[10, 10, 10]} />
+            <Float>
+              <Lego4x2
+                position={[0, 0, 0]}
+                scale={[0.5, 0.5, 0.5]}
+                color="blue"
+              />
+            </Float>
+            <Sparkles position={[0, 0, 1]} />
+          </Suspense>
         </Canvas>
 
         <button
