@@ -19,8 +19,8 @@ type meshBackgroundProps = {
 export const Background = ({ meshes }: meshBackgroundProps) => {
   const positionedMeshes = useMeshBackgroundPositioning(meshes);
   const { speed, rotationIntensity, floatIntensity } = {
-    speed: 0.5,
-    rotationIntensity: 1,
+    speed: 0.1,
+    rotationIntensity: 10,
     floatIntensity: 1,
   };
   const { speed: scrollSpeed } = useAutoZScrolling();
@@ -37,7 +37,7 @@ export const Background = ({ meshes }: meshBackgroundProps) => {
           rotationIntensity={rotationIntensity / cameraFactor}
           floatIntensity={floatIntensity}
           key={index}
-          floatingRange={[-0.1, 0.1]}
+          floatingRange={[-2, 2]}
         >
           {mesh}
         </Float>
@@ -54,7 +54,7 @@ export const Background = ({ meshes }: meshBackgroundProps) => {
       <Stars
         radius={100}
         depth={500}
-        count={1000}
+        count={2500}
         factor={4}
         saturation={0}
         fade

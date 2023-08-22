@@ -44,14 +44,14 @@ export function Alien(props: JSX.IntrinsicElements["group"]) {
       for (const laser of lasers) {
         raycaster.set(laser.position, new THREE.Vector3(0, 0, -1));
         const intersects = raycaster.intersectObject(alienRef.current, true); // true checks all children of the group
-        if (intersects.length > 0) {
+        if (intersects.length > 0 && intersects[0].distance < 0.1) {
           explosionAudio.play().catch((err) => console.error(err));
           setIsHit(true);
 
           scene.remove(laser);
           setTimeout(() => {
             alienRef.current?.parent?.remove(alienRef.current);
-          }, 3000);
+          }, 2000);
 
           break;
         }

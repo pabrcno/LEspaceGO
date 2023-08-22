@@ -45,7 +45,7 @@ export const MainScreen = () => {
     shadowColor,
   } = {
     bgMeshScale: 0.1,
-    bgMeshFactor: 30,
+    bgMeshFactor: 15,
     innerGradientColor: theme.innerGradientColor,
     outerGradientColor: theme.outerGradientColor,
     shadowColor: theme.shadowColor,
@@ -97,6 +97,7 @@ export const MainScreen = () => {
               height: "100vh",
               background: `radial-gradient(circle, ${innerGradientColor}, ${outerGradientColor})`,
               zIndex: 0,
+              cursor: "none",
             }}
           >
             <Suspense fallback={null}>
@@ -114,9 +115,9 @@ export const MainScreen = () => {
                         <Mesh
                           key={`${index}-${factorIndex}`}
                           scale={[
-                            bgMeshScale * 0.3,
-                            bgMeshScale * 0.3,
-                            bgMeshScale * 0.3,
+                            bgMeshScale * 0.5,
+                            bgMeshScale * 0.5,
+                            bgMeshScale * 0.5,
                           ]}
                           color={
                             colors[Math.floor(Math.random() * colors.length)]
@@ -129,12 +130,12 @@ export const MainScreen = () => {
                   ...textureUris.map((texture, textureIndex) => (
                     <Planet
                       key={`${textureIndex}-planet`}
-                      scale={bgMeshScale}
+                      scale={bgMeshScale * 2}
                       textureUri={texture}
                     />
                   )),
 
-                  ...Array.from({ length: 30 }, (_, factorIndex) => (
+                  ...Array.from({ length: 50 }, (_, factorIndex) => (
                     <Alien
                       key={`${factorIndex}-alien`}
                       scale={bgMeshScale / 1.5}

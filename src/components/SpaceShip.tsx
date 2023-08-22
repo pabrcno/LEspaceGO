@@ -15,7 +15,7 @@ export function SpaceShip(): JSX.Element {
     if (!mainBoxRef.current) return;
     const position = new THREE.Vector3(
       mainBoxRef.current.position.x,
-      mainBoxRef.current.position.y + 0.1,
+      mainBoxRef.current.position.y,
       mainBoxRef.current.position.z
     );
     setLasers((prevLasers) => [...prevLasers, position]);
