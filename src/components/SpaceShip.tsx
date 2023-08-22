@@ -15,8 +15,8 @@ export function SpaceShip(): JSX.Element {
     if (!mainBoxRef.current) return;
     const position = new THREE.Vector3(
       mainBoxRef.current.position.x,
-      mainBoxRef.current.position.y,
-      mainBoxRef.current.position.z - 0.11
+      mainBoxRef.current.position.y + 0.1,
+      mainBoxRef.current.position.z
     );
     setLasers((prevLasers) => [...prevLasers, position]);
     shotSound.volume = 0.05;
@@ -32,7 +32,6 @@ export function SpaceShip(): JSX.Element {
       mouse.y * height * 0.1 - 0.1,
       camera.position.z - 1
     );
-
     // Update lasers position
     setLasers((prevLasers) =>
       prevLasers.map((laser) => {

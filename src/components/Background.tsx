@@ -37,7 +37,7 @@ export const Background = ({ meshes }: meshBackgroundProps) => {
           rotationIntensity={rotationIntensity / cameraFactor}
           floatIntensity={floatIntensity}
           key={index}
-          floatingRange={[-1, 1]}
+          floatingRange={[-0.1, 0.1]}
         >
           {mesh}
         </Float>
@@ -45,7 +45,7 @@ export const Background = ({ meshes }: meshBackgroundProps) => {
       <ambientLight />
       <Sparkles
         position={[0, 0, camera.position.z - 10]}
-        size={2}
+        size={3}
         count={100}
         speed={scrollSpeed * 10}
         noise={1}
@@ -54,7 +54,7 @@ export const Background = ({ meshes }: meshBackgroundProps) => {
       <Stars
         radius={100}
         depth={500}
-        count={5000}
+        count={1000}
         factor={4}
         saturation={0}
         fade
