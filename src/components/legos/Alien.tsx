@@ -54,7 +54,7 @@ export function Alien(props: JSX.IntrinsicElements["group"]) {
             if (!alienRef.current) return;
 
             alienRef.current.visible = false;
-            alienRef.current.position.set(0, 0, camera.position.z - 20);
+            alienRef.current.position.set(0, 0, camera.position.z - 40);
           }, 1000);
 
           setTimeout(() => {

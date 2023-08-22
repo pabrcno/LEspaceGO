@@ -11,7 +11,7 @@ import { Planet } from "../../components/legos/Planet";
 import { Alien } from "../../components/legos/Alien";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { Lego2x2 } from "../../components/legos";
-import { StartButton } from "./main.styles";
+import { ControlsContainer, HintContainer, StartButton } from "./main.styles";
 const colors = [
   "#B40000",
   "#FCAC00",
@@ -54,7 +54,7 @@ export const MainScreen = () => {
   const [isStarted, setIsStarted] = useState(false);
   useEffect(() => {
     if (!audioRef.current || !audioMelodyRef.current) return;
-    audioRef.current.volume = 0.5;
+    audioRef.current.volume = 1;
 
     audioRef.current.play().catch((err) => console.error(err));
   }, [isStarted]); //
@@ -84,19 +84,40 @@ export const MainScreen = () => {
             <Sparkles position={[0, 0, 1]} />
           </Suspense>
         </Canvas>
-        <h1
+        <div
           style={{
             position: "absolute",
             top: "20%",
             left: "50%",
             transform: "translate(-50%, -50%)",
             color: "white",
-            fontSize: "5rem",
+            fontSize: "3rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          LESPACEGO
-        </h1>
+          <h1>LESPACEGO</h1>
+        </div>
         <StartButton onClick={() => setIsStarted(true)}>Start</StartButton>
+        <ControlsContainer>
+          <h2>Controls:</h2>
+          <ul>
+            <li>
+              <h2>🖱️ to move</h2>
+            </li>
+            <li>
+              <h2>👆 CLICK/SPACE to shoot</h2>
+            </li>
+            <li>
+              <h2>⬆️ SHIFT to Hyper Speed</h2>
+            </li>
+          </ul>
+        </ControlsContainer>
+
+        <HintContainer>
+          <h6>Hint: Shoot 10 aliens to get a reward! 👽</h6>
+        </HintContainer>
       </div>
     );
   }
@@ -142,12 +163,12 @@ export const MainScreen = () => {
                   ...textureUris.map((texture, textureIndex) => (
                     <Planet
                       key={`${textureIndex}-planet`}
-                      scale={bgMeshScale * 2}
+                      scale={bgMeshScale * 1.5}
                       textureUri={texture}
                     />
                   )),
 
-                  ...Array.from({ length: 30 }, (_, factorIndex) => (
+                  ...Array.from({ length: 20 }, (_, factorIndex) => (
                     <Alien key={`${factorIndex}-alien`} scale={bgMeshScale} />
                   )),
                 ]}

@@ -5,25 +5,44 @@ export const ControlsContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
 
   bottom: 0;
   left: 0;
   padding: 20;
   cursor: pointer;
+  border-radius: 20px;
+  padding: 10px 50px;
 `;
 
 export const StartButton = styled.button`
   position: absolute;
+  font-family: "VCR", sans-serif;
+
   bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
   padding: 10px 50px;
-  fontsize: 2rem;
+  font-size: 2em;
   cursor: pointer;
   background: transparent;
   color: white;
   border: 2px solid white;
-  borderradius: 10px;
+  border-radius: 20px;
+`;
+
+export const HintContainer = styled.div`
+  position: absolute;
+  font-family: "VCR", sans-serif;
+
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+  font-size: 1.5em;
+
+  background: transparent;
+  color: white;
+
+  border-radius: 20px;
 `;

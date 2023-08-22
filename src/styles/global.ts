@@ -7,7 +7,8 @@ const GlobalStyle = createGlobalStyle`
     src: url(${VCR}) format('truetype');
     font-weight: 300;
     font-style: normal;
-    font-display: auto; 
+    font-display: auto;
+    letter-spacing: 1em; 
     
   }
 
@@ -18,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     overflow-y: hidden;
     font-family: 'VCR', sans-serif;
+    color: white;
  
   }
 `;
