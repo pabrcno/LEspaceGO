@@ -23,7 +23,9 @@ type GLTFResult = GLTF & {
   };
 };
 
-export function Alien(props: JSX.IntrinsicElements["group"]) {
+export function Alien(
+  props: JSX.IntrinsicElements["group"] & { handleAlienHit: () => void }
+) {
   const { nodes, materials } = useGLTF("/meshes/alien.glb") as GLTFResult;
   const [isHit, setIsHit] = useState(false);
   const alienRef = useRef<THREE.Group>();
@@ -49,7 +51,7 @@ export function Alien(props: JSX.IntrinsicElements["group"]) {
           setIsHit(true);
 
           scene.remove(laser);
-
+          props.handleAlienHit();
           setTimeout(() => {
             if (!alienRef.current) return;
 

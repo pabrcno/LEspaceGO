@@ -1,7 +1,7 @@
 import { Background } from "../../components/Background";
 import { Canvas } from "@react-three/fiber";
 
-import { Float, Loader, Sparkles, Stats } from "@react-three/drei";
+import { Float, Html, Loader, Sparkles, Stats } from "@react-three/drei";
 
 import { ScreenContainer } from "../../styles/general.styles";
 
@@ -57,6 +57,15 @@ export const MainScreen = () => {
 
     audioRef.current.play().catch((err) => console.error(err));
   }, [isStarted]); //
+
+  const alienCountRef = useRef(0);
+  const [showReward, setShowReward] = useState(false);
+  const handleAlienCount = () => {
+    alienCountRef.current += 1;
+    if (alienCountRef.current === 13) {
+      setShowReward(true);
+    }
+  };
 
   if (!isStarted) {
     return (
@@ -115,7 +124,7 @@ export const MainScreen = () => {
         </ControlsContainer>
 
         <HintContainer>
-          <h6>Hint: Shoot 10 aliens to get a reward! 👽</h6>
+          <h6>Hint: Shoot 13 aliens to get a reward! 👽</h6>
         </HintContainer>
       </div>
     );
@@ -168,13 +177,74 @@ export const MainScreen = () => {
                   )),
 
                   ...Array.from({ length: 20 }, (_, factorIndex) => (
-                    <Alien key={`${factorIndex}-alien`} scale={bgMeshScale} />
+                    <Alien
+                      key={`${factorIndex}-alien`}
+                      scale={bgMeshScale}
+                      handleAlienHit={handleAlienCount}
+                    />
                   )),
                 ]}
               />
             </Suspense>
           </Canvas>
+          {showReward && (
+            <>
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  color: "white",
 
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Canvas>
+                  <Suspense fallback={null}>
+                    <ambientLight />
+                    <directionalLight position={[0, 2, 0]} />
+                    <Float>
+                      <group scale={[1.2, 1.2, 1.2]}>
+                        <Alien
+                          handleAlienHit={() => {
+                            return;
+                          }}
+                        />
+                      </group>
+                    </Float>
+                  </Suspense>
+                </Canvas>
+                <h1>🎉 Congrats! You won a reward! 🎉</h1>
+                <div
+                  style={{
+                    marginTop: 100,
+                  }}
+                >
+                  <a href="/meshes/alien.glb" download>
+                    <StartButton> Get</StartButton>
+                  </a>
+                </div>
+              </div>
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "10%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  color: "white",
+
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <StartButton onClick={() => setShowReward(false)}>
+                  Close
+                </StartButton>
+              </div>
+            </>
+          )}
           <audio ref={audioRef} loop>
             <source src="/sound/background.wav" type="audio/mpeg" />
           </audio>
