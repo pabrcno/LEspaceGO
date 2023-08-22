@@ -1,10 +1,12 @@
 import { useState } from "react";
-import * as fruits from "../components/fruits";
-import * as tools from "../components/tools";
+
+import * as legos from "../components/legos";
+
 export enum ETheme {
   TOOLS = "tools",
   FRUITS = "fruits",
   DEFAULT = "default",
+  LEGOS = "legos",
 }
 
 type TTheme = {
@@ -18,49 +20,41 @@ type TTheme = {
 };
 
 const DEFAULT_THEME: TTheme = {
-  name: ETheme.DEFAULT,
+  name: ETheme.LEGOS,
   innerGradientColor: "#191716",
-  outerGradientColor: "#3D348B",
-  meshes: Object.values(fruits),
-  title: "Paulo's Fruit Store",
+  outerGradientColor: "#000",
+  // values of legos but twice to have more legos
+  meshes: Object.values(legos),
+  title: "",
   shadowColor: "#202020",
 };
 
 //TODO: Add context in order to share over screens
 export const useTheme = () => {
-  const [theme, setTheme] = useState<TTheme>(DEFAULT_THEME);
-
-  const setToolsTheme = () => {
-    setTheme({
-      name: ETheme.TOOLS,
-      innerGradientColor: "#191716",
-      outerGradientColor: "#3D348B",
-      meshes: Object.values(tools),
-      title: "Paulo's Tool Store",
-      shadowColor: "#202020",
-    });
-  };
-
-  const setFruitsTheme = () => {
-    setTheme({
-      name: ETheme.FRUITS,
-      innerGradientColor: "#191716",
-      outerGradientColor: "#3D348B",
-      meshes: Object.values(fruits),
-      title: "Paulo's Fruit Store",
-
-      shadowColor: "#202020",
-    });
-  };
+  const [theme, setTheme] = useState<TTheme>({
+    name: ETheme.LEGOS,
+    innerGradientColor: "#191716",
+    outerGradientColor: "#000",
+    // values of legos but twice to have more legos
+    meshes: Object.values(legos),
+    title: "",
+    shadowColor: "#202020",
+  });
 
   const setDefaultTheme = () => {
-    setTheme(DEFAULT_THEME);
+    setTheme({
+      name: ETheme.LEGOS,
+      innerGradientColor: "#191716",
+      outerGradientColor: "#000",
+      // values of legos but twice to have more legos
+      meshes: Object.values(legos),
+      title: "",
+      shadowColor: "#202020",
+    });
   };
 
   return {
     theme,
-    setToolsTheme,
-    setFruitsTheme,
     setDefaultTheme,
   };
 };

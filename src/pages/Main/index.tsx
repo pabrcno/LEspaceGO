@@ -1,39 +1,53 @@
 import { Background } from "../../components/Background";
 import { Canvas } from "@react-three/fiber";
-import { useControls } from "leva";
 
-import { MainTitle, TitleContainer, TitleNote } from "./main.styles";
+import { Loader, Stats } from "@react-three/drei";
 
-import {
-  ActionButton,
-  ActionButtonContainer,
-  Nav,
-  NavItem,
-  ScreenContainer,
-} from "../../styles/general.styles";
-import { useState } from "react";
+import { ScreenContainer } from "../../styles/general.styles";
 
-import { ETheme, useTheme } from "../../hooks/useTheme";
+import { useTheme } from "../../hooks/useTheme";
+import { SpaceShip } from "../../components/SpaceShip";
+import { Planet } from "../../components/legos/Planet";
+import { Alien } from "../../components/legos/Alien";
+import { Suspense } from "react";
 
-export const MainScreen = ({ goToStore }: { goToStore: () => void }) => {
-  const { theme, setToolsTheme, setFruitsTheme } = useTheme();
-
+export const MainScreen = () => {
+  const { theme } = useTheme();
   const {
     bgMeshScale,
     bgMeshFactor,
     innerGradientColor,
     outerGradientColor,
     shadowColor,
-  } = useControls({
-    bgMeshScale: 0.02,
-    bgMeshFactor: 20,
+  } = {
+    bgMeshScale: 0.1,
+    bgMeshFactor: 15,
     innerGradientColor: theme.innerGradientColor,
     outerGradientColor: theme.outerGradientColor,
     shadowColor: theme.shadowColor,
-  });
+  };
 
-  const [isTitleVisible, setIsTitleVisible] = useState(true);
+  const colors = [
+    "#B40000",
+    "#FCAC00",
+    "#00852B",
+    "#1E5AA8",
+    "#069D9F",
+    "#D05098",
+  ];
 
+  const textureUris = [
+    "/textures/Planet_Caves.jpg",
+    "/textures/Planet_City.jpg",
+    "/textures/Planet_Cliffs.jpg",
+    "/textures/Planet_Desert.jpg",
+    "/textures/Planet_Forest.jpg",
+    "/textures/Planet_Ice.jpg",
+    "/textures/Planet_Lava.jpg",
+    "/textures/Planet_Lava.jpg",
+    "/textures/Planet_Snow.jpg",
+    "/textures/Planet_TropicalValley.jpg",
+  ];
   return (
     <ScreenContainer>
       <Canvas
@@ -43,41 +57,47 @@ export const MainScreen = ({ goToStore }: { goToStore: () => void }) => {
           zIndex: 0,
         }}
       >
-        <fog attach="fog" args={[shadowColor, 11, 12]} />
-        <Background
-          meshes={theme.meshes.flatMap((Mesh, index) =>
-            Array.from({ length: bgMeshFactor }, (_, factorIndex) => (
-              <Mesh key={`${index}-${factorIndex}`} scale={bgMeshScale} />
-            ))
-          )}
-        />
+        <Suspense fallback={null}>
+          <Stats />
+          <fog attach="fog" args={[shadowColor, 8, 11]} />
+          <directionalLight intensity={1} />
+
+          <SpaceShip />
+
+          <Background
+            meshes={theme.meshes.flatMap((Mesh, index) => [
+              ...Array.from({ length: bgMeshFactor }, (_, factorIndex) => (
+                <Mesh
+                  key={`${index}-${factorIndex}`}
+                  scale={bgMeshScale * 0.2}
+                  color={colors[Math.floor(Math.random() * colors.length)]}
+                  textureUri={
+                    textureUris[Math.floor(Math.random() * textureUris.length)]
+                  }
+                />
+              )),
+              ...textureUris.map((texture, textureIndex) => (
+                <Planet
+                  key={`${index}-${textureIndex}-planet`}
+                  scale={bgMeshScale}
+                  textureUri={texture}
+                />
+              )),
+
+              ...Array.from({ length: 24 }, (_, factorIndex) => (
+                <Alien
+                  key={`${index}-${factorIndex}-alien`}
+                  scale={bgMeshScale}
+                />
+              )),
+            ])}
+          />
+        </Suspense>
       </Canvas>
-      <Nav>
-        <div>
-          <NavItem
-            onClick={() => {
-              theme.name === ETheme.TOOLS ? setFruitsTheme() : setToolsTheme();
-            }}
-          >
-            Change Theme
-          </NavItem>
-        </div>
-        <a href="https://github.com/pabrcno/fruits">
-          <NavItem>
-            Repo
-            <img src="/github-icon.png" alt="gh-icon" height={25}></img>
-          </NavItem>
-        </a>
-      </Nav>
-      {isTitleVisible && (
-        <TitleContainer onDoubleClick={() => setIsTitleVisible(false)}>
-          <MainTitle>{theme.title}</MainTitle>
-          <TitleNote>(Double tap to hide)</TitleNote>
-        </TitleContainer>
-      )}
-      <ActionButtonContainer>
-        <ActionButton onClick={goToStore}>Store</ActionButton>
-      </ActionButtonContainer>
+      <Loader />
+      {/* <ControlsContainer>
+        <Controls />
+      </ControlsContainer> */}
     </ScreenContainer>
   );
 };
