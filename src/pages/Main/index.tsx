@@ -139,7 +139,7 @@ export const MainScreen = () => {
                     />
                   )),
 
-                  ...Array.from({ length: 24 }, (_, factorIndex) => (
+                  ...Array.from({ length: 12 }, (_, factorIndex) => (
                     <Alien
                       key={`${index}-${factorIndex}-alien`}
                       scale={bgMeshScale / 1.5}
