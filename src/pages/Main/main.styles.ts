@@ -54,3 +54,15 @@ export const HintContainer = styled.div`
     opacity: 0;
   }
 `;
+
+export const TitleContainer = styled.div`
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

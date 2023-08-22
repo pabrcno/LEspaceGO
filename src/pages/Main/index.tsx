@@ -1,7 +1,7 @@
 import { Background } from "../../components/Background";
 import { Canvas } from "@react-three/fiber";
 
-import { Float, Html, Loader, Sparkles, Stats } from "@react-three/drei";
+import { Float, Loader, Sparkles, Stats } from "@react-three/drei";
 
 import { ScreenContainer } from "../../styles/general.styles";
 
@@ -11,15 +11,14 @@ import { Planet } from "../../components/legos/Planet";
 import { Alien } from "../../components/legos/Alien";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { Lego2x2 } from "../../components/legos";
-import { ControlsContainer, HintContainer, StartButton } from "./main.styles";
-const colors = [
-  "#B40000",
-  "#FCAC00",
-  "#00852B",
-  "#1E5AA8",
-  "#069D9F",
-  "#D05098",
-];
+import {
+  ControlsContainer,
+  HintContainer,
+  StartButton,
+  TitleContainer,
+} from "./main.styles";
+import { colors } from "../../constants";
+import { Title } from "../../components/Title";
 
 const textureUris = [
   "/textures/Planet_Caves.jpg",
@@ -92,21 +91,9 @@ export const MainScreen = () => {
             <Sparkles position={[0, 0, 1]} />
           </Suspense>
         </Canvas>
-        <div
-          style={{
-            position: "absolute",
-            top: "20%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            color: "white",
-            fontSize: "3rem",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <h1>LESPACEGO</h1>
-        </div>
+        <TitleContainer>
+          <Title text="LESPACEGO" />
+        </TitleContainer>
         <StartButton onClick={() => setIsStarted(true)}>Start</StartButton>
         <ControlsContainer>
           <h2>Controls:</h2>
