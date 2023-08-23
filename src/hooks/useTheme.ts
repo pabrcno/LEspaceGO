@@ -16,7 +16,7 @@ export const useTheme = () => {
     // values of legos but twice to have more legos
     meshes: Object.values(legos).flatMap((lego) => [lego]),
     title: "",
-    shadowColor: "#202020",
+    shadowColor: "#101010",
   };
 
   return {

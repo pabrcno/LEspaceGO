@@ -130,7 +130,7 @@ export const MainScreen = () => {
             }}
           >
             <Suspense fallback={null}>
-              <fog attach="fog" args={[shadowColor, 8, 11]} />
+              <fog attach="fog" args={[shadowColor, 7, 9]} />
 
               <SpaceShip />
 
