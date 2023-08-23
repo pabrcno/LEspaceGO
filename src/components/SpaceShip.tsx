@@ -1,6 +1,5 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { useState, useRef, useEffect, useMemo } from "react";
-
 import { Box } from "@react-three/drei";
 import * as THREE from "three";
 import { SpaceshipMesh } from "./SpaceShipMesh";
@@ -11,14 +10,22 @@ export function SpaceShip(): JSX.Element {
   const { camera } = useThree();
   const shotSound = useMemo(() => new Audio("/sound/laser-shot.wav"), []);
   const legoSound = useMemo(() => new Audio("/sound/lego-click.wav"), []);
+
   const handleShoot = () => {
     if (!mainBoxRef.current) return;
-    const position = new THREE.Vector3(
-      mainBoxRef.current.position.x,
-      mainBoxRef.current.position.y,
-      mainBoxRef.current.position.z
+
+    // Get the spaceship's current position and orientation
+    const shipPosition = mainBoxRef.current.position.clone();
+    const shipQuaternion = mainBoxRef.current.quaternion.clone();
+
+    // Offset laser start position based on orientation
+    const offset = new THREE.Vector3(0, 0, -0.1).applyQuaternion(
+      shipQuaternion
     );
-    setLasers((prevLasers) => [...prevLasers, position]);
+    const shootPosition = shipPosition.add(offset);
+
+    setLasers((prevLasers) => [...prevLasers, shootPosition]);
+
     shotSound.volume = 0.05;
     legoSound.play().catch((err) => console.error(err));
     shotSound.play().catch((err) => console.error(err));
@@ -32,6 +39,14 @@ export function SpaceShip(): JSX.Element {
       mouse.y * height * 0.1,
       camera.position.z - 1
     );
+
+    // Rotation based on mouse movement
+    mainBoxRef.current.rotation.set(
+      Math.PI / 2 + mouse.y * 0.1,
+      mouse.x * Math.PI * 0.1,
+      -Math.PI
+    );
+
     // Update lasers position
     setLasers((prevLasers) =>
       prevLasers.map((laser) => {
@@ -42,7 +57,6 @@ export function SpaceShip(): JSX.Element {
     );
   });
 
-  // Cleanup lasers that are out of view after updating their positions.
   useEffect(() => {
     setLasers((prevLasers) =>
       prevLasers.filter((laser) => laser.z > camera.position.z - 5)
