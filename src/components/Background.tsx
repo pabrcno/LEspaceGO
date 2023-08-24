@@ -21,13 +21,13 @@ export const Background = ({ meshes }: meshBackgroundProps) => {
   const { speed, rotationIntensity, floatIntensity } = {
     speed: 0.1,
     rotationIntensity: 5,
-    floatIntensity: 1,
+    floatIntensity: 5,
   };
   const { speed: scrollSpeed } = useAutoZScrolling();
 
   const { camera } = useThree();
 
-  const cameraFactor = Math.abs(camera.position.z) / 2 + 2;
+  const cameraFactor = Math.abs(camera.position.z) + 2;
 
   return (
     <group>
@@ -38,7 +38,7 @@ export const Background = ({ meshes }: meshBackgroundProps) => {
           rotationIntensity={rotationIntensity / cameraFactor}
           floatIntensity={floatIntensity}
           key={index}
-          floatingRange={[-1, 1]}
+          floatingRange={[-0.1, 0.1]}
         >
           {mesh}
         </Float>
