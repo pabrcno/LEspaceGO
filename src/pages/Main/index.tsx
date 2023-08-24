@@ -1,7 +1,7 @@
 import { Background } from "../../components/Background";
 import { Canvas } from "@react-three/fiber";
 
-import { Float, Loader, Sparkles } from "@react-three/drei";
+import { Float, Loader, Sparkles, Stats } from "@react-three/drei";
 
 import { ScreenContainer } from "../../styles/general.styles";
 import { useLoader } from "@react-three/fiber";
@@ -120,7 +120,7 @@ export const MainScreen = () => {
       {
         <>
           <Loader />
-
+          <Stats />
           <Suspense fallback={null}>
             <Canvas
               style={{
