@@ -34,7 +34,7 @@ export const useAutoZScrolling = (deactivateScroll?: boolean) => {
       }
 
       // Set the spring to the faster speed
-      setSpeed({ speed: 0.25 });
+      setSpeed({ speed: 0.5 });
     }, 200);
 
     const onKeyDown = (e: KeyboardEvent) => {

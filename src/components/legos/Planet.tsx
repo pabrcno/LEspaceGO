@@ -1,4 +1,4 @@
-import { useGLTF, useTexture } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { AnimatedLegoWrapper } from "./AnimatedLegoWrapper";
 
@@ -10,24 +10,21 @@ type GLTFResult = GLTF & {
     blue_and_green_planet: THREE.MeshStandardMaterial;
   };
 };
-
 export function Planet(
-  props: JSX.IntrinsicElements["group"] & { textureUri: string }
+  props: JSX.IntrinsicElements["group"] & { texture: THREE.Texture }
 ) {
   const { nodes, materials } = useGLTF("/planet.glb") as GLTFResult;
-  const texture = useTexture(props.textureUri);
-  const clonedMaterial = materials["blue_and_green_planet"].clone();
 
-  // Update the material's color if a color prop is provided
-  if (texture) {
-    clonedMaterial.map = texture;
-  }
+  // Clone the material and set the map to the provided texture
+  const clonedMaterial = materials["blue_and_green_planet"].clone();
+  clonedMaterial.map = props.texture;
 
   return (
     <group {...props} dispose={null}>
       <AnimatedLegoWrapper>
         <mesh geometry={nodes.planet_lego.geometry}>
-          <meshStandardMaterial map={texture} />
+          {/* Use the cloned material with the updated texture */}
+          <primitive object={clonedMaterial} />
         </mesh>
       </AnimatedLegoWrapper>
     </group>

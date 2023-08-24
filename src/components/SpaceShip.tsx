@@ -41,7 +41,7 @@ export function SpaceShip(): JSX.Element {
     mainBoxRef.current.position.set(
       mouse.x * width,
       mouse.y * height,
-      camera.position.z - 4
+      camera.position.z - 3.5
     );
     // Update lasers position
     setLasers((prevLasers) =>

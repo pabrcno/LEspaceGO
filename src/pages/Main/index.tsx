@@ -4,7 +4,8 @@ import { Canvas } from "@react-three/fiber";
 import { Float, Loader, Sparkles } from "@react-three/drei";
 
 import { ScreenContainer } from "../../styles/general.styles";
-
+import { useLoader } from "@react-three/fiber";
+import { TextureLoader } from "three";
 import { useTheme } from "../../hooks/useTheme";
 import { SpaceShip } from "../../components/SpaceShip";
 import { Planet } from "../../components/legos/Planet";
@@ -54,6 +55,7 @@ export const MainScreen = () => {
 
     audioRef.current.play().catch((err) => console.error(err));
   }, [isStarted]); //
+  const textures = useLoader(TextureLoader, textureUris) as THREE.Texture[];
 
   const alienCountRef = useRef(0);
   const [showReward, setShowReward] = useState(false);
@@ -160,14 +162,14 @@ export const MainScreen = () => {
                     <Planet
                       key={`${textureIndex}-planet`}
                       scale={bgMeshScale * Math.random() * 2}
-                      textureUri={texture}
+                      texture={textures[textureIndex]}
                     />
                   )),
 
                   ...Array.from({ length: 15 }, (_, factorIndex) => (
                     <Alien
                       key={`${factorIndex}-alien`}
-                      scale={bgMeshScale}
+                      scale={bgMeshScale * 2}
                       handleAlienHit={handleAlienCount}
                     />
                   )),
@@ -187,6 +189,7 @@ export const MainScreen = () => {
 
                   display: "flex",
                   flexDirection: "column",
+                  zIndex: 2,
                 }}
               >
                 <Canvas>
