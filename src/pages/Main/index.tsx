@@ -1,7 +1,7 @@
 import { Background } from "../../components/Background";
 import { Canvas } from "@react-three/fiber";
 
-import { Float, Loader, Sparkles } from "@react-three/drei";
+import { Float, Loader, Sparkles, Stats } from "@react-three/drei";
 
 import { ScreenContainer } from "../../styles/general.styles";
 
@@ -119,6 +119,7 @@ export const MainScreen = () => {
       {
         <>
           <Loader />
+          <Stats />
           <Suspense fallback={null}>
             <Canvas
               style={{
@@ -140,11 +141,14 @@ export const MainScreen = () => {
                       (_, factorIndex) => (
                         <Mesh
                           key={`${index}-${factorIndex}`}
-                          scale={[
-                            bgMeshScale * 0.5,
-                            bgMeshScale * 0.5,
-                            bgMeshScale * 0.5,
-                          ]}
+                          scale={(() => {
+                            const scale = Math.random() * bgMeshScale;
+                            return [scale, scale, scale] as [
+                              number,
+                              number,
+                              number
+                            ];
+                          })()}
                           color={
                             colors[Math.floor(Math.random() * colors.length)]
                           }
@@ -161,7 +165,7 @@ export const MainScreen = () => {
                     />
                   )),
 
-                  ...Array.from({ length: 20 }, (_, factorIndex) => (
+                  ...Array.from({ length: 15 }, (_, factorIndex) => (
                     <Alien
                       key={`${factorIndex}-alien`}
                       scale={bgMeshScale}
