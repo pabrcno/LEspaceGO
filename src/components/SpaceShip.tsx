@@ -19,9 +19,7 @@ export function SpaceShip(): JSX.Element {
     const shipQuaternion = mainBoxRef.current.quaternion.clone();
 
     // Offset laser start position based on orientation
-    const offset = new THREE.Vector3(0, 0, -0.1).applyQuaternion(
-      shipQuaternion
-    );
+    const offset = new THREE.Vector3(0, 0, 0).applyQuaternion(shipQuaternion);
     const shootPosition = shipPosition.add(offset);
 
     setLasers((prevLasers) => [...prevLasers, shootPosition]);
