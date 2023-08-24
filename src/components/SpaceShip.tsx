@@ -33,33 +33,29 @@ export function SpaceShip(): JSX.Element {
     if (!mainBoxRef.current) return;
 
     mainBoxRef.current.position.set(
-      mouse.x * width * 0.1,
-      mouse.y * height * 0.1,
-      camera.position.z - 1
+      mouse.x * width * 0.25,
+      mouse.y * height * 0.25,
+      camera.position.z - 2
     );
 
     // Rotation based on mouse movement
     mainBoxRef.current.rotation.set(
       Math.PI / 2 + mouse.y * 0.1,
-      mouse.x * Math.PI * 0.1,
+      mouse.x * Math.PI * 0.25,
       -Math.PI
     );
 
     // Update lasers position
     setLasers((prevLasers) =>
-      prevLasers.map((laser) => {
-        const updatedLaser = laser.clone();
-        updatedLaser.z -= 0.5;
-        return updatedLaser;
-      })
+      prevLasers
+        .filter((laser) => laser.z > camera.position.z - 10)
+        .map((laser) => {
+          const updatedLaser = laser.clone();
+          updatedLaser.z -= 0.5;
+          return updatedLaser;
+        })
     );
   });
-
-  useEffect(() => {
-    setLasers((prevLasers) =>
-      prevLasers.filter((laser) => laser.z > camera.position.z - 5)
-    );
-  }, [camera.position.z, lasers]);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -70,6 +66,8 @@ export function SpaceShip(): JSX.Element {
 
     window.addEventListener("keydown", onKeyDown);
 
+    window.addEventListener("click", handleShoot);
+
     return () => {
       window.removeEventListener("keydown", onKeyDown);
     };
@@ -78,7 +76,7 @@ export function SpaceShip(): JSX.Element {
 
   return (
     <>
-      <SpaceshipMesh onClick={handleShoot} ref={mainBoxRef} />
+      <SpaceshipMesh ref={mainBoxRef} />
       {lasers.map((laserPosition, idx) => (
         <Box
           scale={[0.01, 0.01, 0.1]}

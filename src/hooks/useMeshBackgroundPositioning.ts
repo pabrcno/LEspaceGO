@@ -6,7 +6,7 @@ const MIN_DISTANCE = 5;
 export const useMeshBackgroundPositioning = (meshes: JSX.Element[]) => {
   const { viewport } = useThree();
   const MAX_RANGE = viewport.width * 0.15;
-  const MAX_RANGE_Y = viewport.height * 0.05;
+  const MAX_RANGE_Y = viewport.height * 0.01;
   const [positions, setPositions] = useState<[number, number, number][]>([]);
   const { camera } = useThree();
 
@@ -14,7 +14,7 @@ export const useMeshBackgroundPositioning = (meshes: JSX.Element[]) => {
     return [
       (Math.random() - 0.5) * MAX_RANGE,
       (Math.random() - 0.5) * MAX_RANGE_Y,
-      (Math.random() - 0.5) * 10,
+      (Math.random() - 0.5) * 20,
     ] as [number, number, number];
   }
 
@@ -34,14 +34,14 @@ export const useMeshBackgroundPositioning = (meshes: JSX.Element[]) => {
   }
 
   const THRESHOLD = 10; // The distance from camera when objects start moving closer.
-  const BEHIND_CAMERA = 1; // The distance behind the camera to render the objects.
+  const BEHIND_CAMERA = 0; // The distance behind the camera to render the objects.
 
   useFrame(() => {
     const newPositions = positions.map(([x, y, z]) => {
       if (camera.position.z < z) {
         return [
           x + (Math.random() - 0.5) * -1.5,
-          y + (Math.random() - 0.5) * -1.5,
+          y + (Math.random() - 0.5),
           camera.position.z - (Math.random() - 0.5) * 2.5 - THRESHOLD,
         ];
       } else if (z < camera.position.z - THRESHOLD) {

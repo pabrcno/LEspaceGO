@@ -44,7 +44,7 @@ export const SpaceshipMesh = forwardRef(
           ref={ref as React.Ref<THREE.Group>}
           position={[198.694, 43.073, 44.939]}
           rotation={[-Math.PI / 2, Math.PI, 0]}
-          scale={[0.003, 0.003, 0.003]}
+          scale={[0.005, 0.005, 0.005]}
         >
           <mesh
             geometry={nodes["26-material018_1"].geometry}

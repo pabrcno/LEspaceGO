@@ -21,16 +21,14 @@ import { colors } from "../../constants";
 import { Title } from "../../components/Title";
 
 const textureUris = [
-  "/textures/Planet_Caves.jpg",
-  "/textures/Planet_City.jpg",
-  "/textures/Planet_Cliffs.jpg",
-  "/textures/Planet_Desert.jpg",
-  "/textures/Planet_Forest.jpg",
-  "/textures/Planet_Ice.jpg",
-  "/textures/Planet_Lava.jpg",
-  "/textures/Planet_Lava.jpg",
-  "/textures/Planet_Snow.jpg",
-  "/textures/Planet_TropicalValley.jpg",
+  "/textures/earth.jpg",
+  "/textures/jupiter.jpg",
+  "/textures/mars.jpg",
+  "/textures/mercury.jpg",
+  "/textures/neptune.jpg",
+  "/textures/saturn.jpg",
+  "/textures/uranus.jpg",
+  "/textures/venus.jpg",
 ];
 export const MainScreen = () => {
   const { theme } = useTheme();
@@ -121,15 +119,15 @@ export const MainScreen = () => {
       {
         <>
           <Loader />
-          <Canvas
-            style={{
-              height: "100vh",
-              background: `radial-gradient(circle, ${innerGradientColor}, ${outerGradientColor})`,
-              zIndex: 0,
-              cursor: "none",
-            }}
-          >
-            <Suspense fallback={null}>
+          <Suspense fallback={null}>
+            <Canvas
+              style={{
+                height: "100vh",
+                background: `radial-gradient(circle, ${innerGradientColor}, ${outerGradientColor})`,
+                zIndex: 0,
+                cursor: "none",
+              }}
+            >
               <fog attach="fog" args={[shadowColor, 7, 9]} />
 
               <SpaceShip />
@@ -158,7 +156,7 @@ export const MainScreen = () => {
                   ...textureUris.map((texture, textureIndex) => (
                     <Planet
                       key={`${textureIndex}-planet`}
-                      scale={bgMeshScale * 1.5}
+                      scale={bgMeshScale * Math.random() * 2}
                       textureUri={texture}
                     />
                   )),
@@ -172,8 +170,8 @@ export const MainScreen = () => {
                   )),
                 ]}
               />
-            </Suspense>
-          </Canvas>
+            </Canvas>
+          </Suspense>
           {showReward && (
             <>
               <div
