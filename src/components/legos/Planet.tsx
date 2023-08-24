@@ -14,7 +14,7 @@ type GLTFResult = GLTF & {
 export function Planet(
   props: JSX.IntrinsicElements["group"] & { textureUri: string }
 ) {
-  const { nodes, materials } = useGLTF("/meshes/planet.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("/planet.glb") as GLTFResult;
   const texture = useTexture(props.textureUri);
   const clonedMaterial = materials["blue_and_green_planet"].clone();
 

@@ -33,8 +33,8 @@ export const useMeshBackgroundPositioning = (meshes: JSX.Element[]) => {
     return false;
   }
 
-  const THRESHOLD = 10; // The distance from camera when objects start moving closer.
-  const BEHIND_CAMERA = 0; // The distance behind the camera to render the objects.
+  const THRESHOLD = 16; // The distance from camera when objects start moving closer.
+  const BEHIND_CAMERA = 1; // The distance behind the camera to render the objects.
 
   useFrame(() => {
     const newPositions = positions.map(([x, y, z]) => {

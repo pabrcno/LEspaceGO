@@ -14,9 +14,9 @@ export const useAutoZScrolling = (deactivateScroll?: boolean) => {
 
     // Update camera position with the current animated speed
     lastY.current -= speed.get();
-    camera.position.z = lastY.current;
+    camera.position.z = lastY.current + 4;
   });
-  const speedAudio = useMemo(() => new Audio("/sound/speed.wav"), []);
+  const speedAudio = useMemo(() => new Audio("/speed.wav"), []);
   const [played, setPlayed] = useState(false);
   const [keyDown, setKeyDown] = useState(false); // New state to track if key is currently down
   speedAudio.volume = 0.1;

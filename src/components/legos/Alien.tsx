@@ -26,7 +26,7 @@ type GLTFResult = GLTF & {
 export function Alien(
   props: JSX.IntrinsicElements["group"] & { handleAlienHit: () => void }
 ) {
-  const { nodes, materials } = useGLTF("/meshes/alien.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("/alien.glb") as GLTFResult;
   const [isHit, setIsHit] = useState(false);
   const alienRef = useRef<THREE.Group>();
   const raycaster = new THREE.Raycaster();
@@ -35,7 +35,7 @@ export function Alien(
     explosionScale: isHit ? [1, 1, 1] : [0, 0, 0], // Explosion effect
     config: { duration: 500 }, // Duration of animation
   });
-  const explosionAudio = useMemo(() => new Audio("/sound/explosion.wav"), []);
+  const explosionAudio = useMemo(() => new Audio("/explosion.wav"), []);
   explosionAudio.volume = 0.5;
   useFrame(({ scene, camera }) => {
     // If already hit, no need to check further

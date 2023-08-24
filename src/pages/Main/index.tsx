@@ -21,14 +21,14 @@ import { colors } from "../../constants";
 import { Title } from "../../components/Title";
 
 const textureUris = [
-  "/textures/earth.jpg",
-  "/textures/jupiter.jpg",
-  "/textures/mars.jpg",
-  "/textures/mercury.jpg",
-  "/textures/neptune.jpg",
-  "/textures/saturn.jpg",
-  "/textures/uranus.jpg",
-  "/textures/venus.jpg",
+  "/earth.jpg",
+  "/jupiter.jpg",
+  "/mars.jpg",
+  "/mercury.jpg",
+  "/neptune.jpg",
+  "/saturn.jpg",
+  "/uranus.jpg",
+  "/venus.jpg",
 ];
 export const MainScreen = () => {
   const { theme } = useTheme();
@@ -70,13 +70,12 @@ export const MainScreen = () => {
         style={{ position: "relative", height: "100vh", overflow: "hidden" }}
       >
         <Loader />
-
-        <Canvas
-          style={{
-            background: `radial-gradient(circle, ${innerGradientColor}, ${outerGradientColor})`,
-          }}
-        >
-          <Suspense fallback={null}>
+        <Suspense fallback={null}>
+          <Canvas
+            style={{
+              background: `radial-gradient(circle, ${innerGradientColor}, ${outerGradientColor})`,
+            }}
+          >
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
             <Float rotation={[Math.PI / 16, Math.PI, 0]}>
@@ -87,8 +86,8 @@ export const MainScreen = () => {
               />
             </Float>
             <Sparkles position={[0, 0, 1]} />
-          </Suspense>
-        </Canvas>
+          </Canvas>
+        </Suspense>
         <TitleContainer>
           <Title text="LESPACEGO" />
         </TitleContainer>
@@ -129,7 +128,7 @@ export const MainScreen = () => {
                 cursor: "none",
               }}
             >
-              <fog attach="fog" args={[shadowColor, 7, 9]} />
+              <fog attach="fog" args={[shadowColor, 11, 13]} />
 
               <SpaceShip />
 
@@ -235,7 +234,7 @@ export const MainScreen = () => {
             </>
           )}
           <audio ref={audioRef} loop>
-            <source src="/sound/background.wav" type="audio/mpeg" />
+            <source src="/background.wav" type="audio/mpeg" />
           </audio>
         </>
       }

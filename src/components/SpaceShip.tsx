@@ -8,8 +8,8 @@ export function SpaceShip(): JSX.Element {
   const [lasers, setLasers] = useState<THREE.Vector3[]>([]);
   const mainBoxRef = useRef<THREE.Mesh>(null);
   const { camera } = useThree();
-  const shotSound = useMemo(() => new Audio("/sound/laser-shot.wav"), []);
-  const legoSound = useMemo(() => new Audio("/sound/lego-click.wav"), []);
+  const shotSound = useMemo(() => new Audio("/laser-shot.wav"), []);
+  const legoSound = useMemo(() => new Audio("/lego-click.wav"), []);
 
   const handleShoot = () => {
     if (!mainBoxRef.current) return;
@@ -19,9 +19,7 @@ export function SpaceShip(): JSX.Element {
     const shipQuaternion = mainBoxRef.current.quaternion.clone();
 
     // Offset laser start position based on orientation
-    const offset = new THREE.Vector3(0, -0.5, 0).applyQuaternion(
-      shipQuaternion
-    );
+    const offset = new THREE.Vector3(0, 0, 0).applyQuaternion(shipQuaternion);
     const shootPosition = shipPosition.add(offset);
 
     setLasers((prevLasers) => [...prevLasers, shootPosition]);
@@ -34,23 +32,21 @@ export function SpaceShip(): JSX.Element {
   useFrame(({ mouse, viewport: { width, height } }) => {
     if (!mainBoxRef.current) return;
 
-    mainBoxRef.current.position.set(
-      mouse.x * width * 0.25,
-      mouse.y * height * 0.25,
-      camera.position.z - 2
-    );
-
     // Rotation based on mouse movement
     mainBoxRef.current.rotation.set(
-      Math.PI / 2 + mouse.y * 0.1,
+      Math.PI / 2 + mouse.y * 0.25,
       mouse.x * Math.PI * 0.25,
       -Math.PI
     );
-
+    mainBoxRef.current.position.set(
+      mouse.x * width,
+      mouse.y * height,
+      camera.position.z - 4
+    );
     // Update lasers position
     setLasers((prevLasers) =>
       prevLasers
-        .filter((laser) => laser.z > camera.position.z - 10)
+        .filter((laser) => laser.z > camera.position.z - 20)
         .map((laser) => {
           const updatedLaser = laser.clone();
           updatedLaser.z -= 0.5;

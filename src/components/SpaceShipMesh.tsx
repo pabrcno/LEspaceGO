@@ -36,7 +36,7 @@ type GLTFResult = GLTF & {
 export const SpaceshipMesh = forwardRef(
   (props: JSX.IntrinsicElements["group"], ref) => {
     const { nodes, materials } = useGLTF(
-      "/meshes/LEGO_SPACESHIP_LP.glb"
+      "/LEGO_SPACESHIP_LP.glb"
     ) as GLTFResult;
     return (
       <group {...props} dispose={null}>
@@ -44,7 +44,7 @@ export const SpaceshipMesh = forwardRef(
           ref={ref as React.Ref<THREE.Group>}
           position={[198.694, 43.073, 44.939]}
           rotation={[-Math.PI / 2, Math.PI, 0]}
-          scale={[0.005, 0.005, 0.005]}
+          scale={[0.0075, 0.0075, 0.0075]}
         >
           <mesh
             geometry={nodes["26-material018_1"].geometry}
