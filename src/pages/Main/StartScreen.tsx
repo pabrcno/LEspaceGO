@@ -1,9 +1,7 @@
-import { Canvas, useLoader } from "@react-three/fiber";
-
-import { Float, Loader, Sparkles } from "@react-three/drei";
+import { Loader } from "@react-three/drei";
 
 import { FC, Suspense } from "react";
-import { Lego2x2 } from "../../components/legos";
+
 import {
   ControlsContainer,
   HintContainer,
@@ -12,8 +10,7 @@ import {
 } from "./main.styles";
 
 import { Title } from "../../components/Title";
-import { colors, textureUris } from "../../constants";
-import { TextureLoader } from "three";
+
 import { SolarSystem } from "../../components/SolarSystem";
 
 interface StartScreenProps {
