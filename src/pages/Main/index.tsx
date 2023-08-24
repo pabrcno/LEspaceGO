@@ -158,11 +158,11 @@ export const MainScreen = () => {
                     ),
                   ]),
 
-                  ...textureUris.map((texture, textureIndex) => (
+                  ...textures.map((texture, textureIndex) => (
                     <Planet
                       key={`${textureIndex}-planet`}
                       scale={bgMeshScale * Math.random() * 2}
-                      texture={textures[textureIndex]}
+                      texture={texture}
                     />
                   )),
 
