@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Lego1x1 } from "./Lego1x1";
+import { Group } from "three";
 
 type LegoRingProps = {
   amount: number;
@@ -40,7 +41,7 @@ export const LegoRing: React.FC<LegoRingProps> = ({
   }
 
   return (
-    <group ref={groupRef} {...props}>
+    <group ref={groupRef as unknown as React.Ref<Group>} {...props}>
       {legos}
     </group>
   );

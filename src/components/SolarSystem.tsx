@@ -4,9 +4,11 @@ import { TextureLoader } from "three";
 import { useLoader } from "@react-three/fiber";
 import { Planet } from "./legos/Planet";
 import { textureUris } from "../constants";
-import { OrbitControls, Sparkles, Stars } from "@react-three/drei";
+import { OrbitControls, Stars } from "@react-three/drei";
 import { LegoRing } from "./legos/LegoRing";
-import { Lego1x1 } from "./legos";
+
+import { Group } from "three/src/objects/Group.js";
+
 type TPlanetData = {
   name: string;
   scale: number;
@@ -114,18 +116,35 @@ const AnimatedPlanet: React.FC<PlanetProps> = ({
   });
 
   return (
-    <group ref={meshRef}>
+    <group ref={meshRef as unknown as React.Ref<Group>}>
       <Planet scale={scale} texture={texture} />
-
-      {/* For Jupiter, render the ring of Legos */}
-      {name === "saturn" && (
+      {name === "earth" && (
         <LegoRing
-          scale={[10, 10, 10]}
-          amount={100}
-          radius={20}
-          rotationSpeed={0.03}
+          scale={[1.2, 1.2, 1.2]}
+          amount={1}
+          radius={10}
+          rotationSpeed={0.0001}
           color="gray"
         />
+      )}
+      {/* For Jupiter, render the ring of Legos */}
+      {name === "saturn" && (
+        <>
+          <LegoRing
+            scale={[1, 1, 1]}
+            amount={10}
+            radius={20}
+            rotationSpeed={0.01}
+            color="gray"
+          />
+          <LegoRing
+            scale={[1, 1, 1]}
+            amount={15}
+            radius={30}
+            rotationSpeed={0.005}
+            color="gray"
+          />
+        </>
       )}
     </group>
   );
@@ -156,57 +175,56 @@ export const SolarSystem: React.FC = () => {
         {
           //sun
         }
-        <pointLight
-          position={[0, 25, 0]}
-          scale={[20, 20, 20]}
-          intensity={0.5}
-        />
+        <group>
+          <pointLight
+            position={[0, 25, 0]}
+            scale={[20, 20, 20]}
+            intensity={0.5}
+          />
 
-        <pointLight
-          position={[25, 0, 0]}
-          scale={[20, 20, 20]}
-          intensity={0.5}
-        />
-        <pointLight
-          position={[-25, 0, 0]}
-          scale={[20, 20, 20]}
-          intensity={0.5}
-        />
-        <pointLight
-          position={[0, -25, 0]}
-          scale={[20, 20, 20]}
-          intensity={0.5}
-        />
-        <pointLight
-          position={[0, 0, 25]}
-          scale={[20, 20, 20]}
-          intensity={0.5}
-        />
-        <pointLight
-          position={[0, 0, -25]}
-          scale={[20, 20, 20]}
-          intensity={0.5}
-        />
-        <Planet
-          opacity={1}
-          scale={6}
-          texture={textures[1]}
-          position={[0, 0, 0]}
-        />
+          <pointLight
+            position={[25, 0, 0]}
+            scale={[20, 20, 20]}
+            intensity={0.5}
+          />
+          <pointLight
+            position={[-25, 0, 0]}
+            scale={[20, 20, 20]}
+            intensity={0.5}
+          />
+          <pointLight
+            position={[0, -25, 0]}
+            scale={[20, 20, 20]}
+            intensity={0.5}
+          />
+          <pointLight
+            position={[0, 0, 25]}
+            scale={[20, 20, 20]}
+            intensity={0.5}
+          />
+          <pointLight
+            position={[0, 0, -25]}
+            scale={[20, 20, 20]}
+            intensity={0.5}
+          />
+          <Planet
+            opacity={1}
+            scale={6}
+            texture={textures[1]}
+            position={[0, 0, 0]}
+          />
+        </group>
         {planetData.map((planet, index) => {
           return (
             <AnimatedPlanet
               key={planet.name}
-              scale={planet.scale}
+              {...planet}
               texture={textures[index]}
-              orbitRadius={planet.orbitRadius}
-              rotationSpeed={planet.rotationSpeed}
-              orbitSpeed={planet.orbitSpeed}
             />
           );
         })}
       </group>
-      {/* <Sparkles position={[0, 0, 1]} /> */}
+
       <OrbitControls />
     </Canvas>
   );
