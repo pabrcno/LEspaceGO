@@ -1,7 +1,7 @@
 import { Background } from "../../components/Background";
 import { Canvas } from "@react-three/fiber";
 
-import { Float, Loader, Sparkles, Stats } from "@react-three/drei";
+import { Float, Loader, Stats } from "@react-three/drei";
 
 import { ScreenContainer } from "../../styles/general.styles";
 import { useLoader } from "@react-three/fiber";
@@ -11,26 +11,12 @@ import { SpaceShip } from "../../components/SpaceShip";
 import { Planet } from "../../components/legos/Planet";
 import { Alien } from "../../components/legos/Alien";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { Lego2x2 } from "../../components/legos";
-import {
-  ControlsContainer,
-  HintContainer,
-  StartButton,
-  TitleContainer,
-} from "./main.styles";
-import { colors } from "../../constants";
-import { Title } from "../../components/Title";
 
-const textureUris = [
-  "/earth.jpg",
-  "/jupiter.jpg",
-  "/mars.jpg",
-  "/mercury.jpg",
-  "/neptune.jpg",
-  "/saturn.jpg",
-  "/uranus.jpg",
-  "/venus.jpg",
-];
+import { StartButton } from "./main.styles";
+import { colors, textureUris } from "../../constants";
+
+import { StartScreen } from "./StartScreen";
+
 export const MainScreen = () => {
   const { theme } = useTheme();
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -55,7 +41,10 @@ export const MainScreen = () => {
 
     audioRef.current.play().catch((err) => console.error(err));
   }, [isStarted]); //
-  const textures = useLoader(TextureLoader, textureUris) as THREE.Texture[];
+  const textures = useLoader(
+    TextureLoader,
+    Object.values(textureUris)
+  ) as THREE.Texture[];
 
   const alienCountRef = useRef(0);
   const [showReward, setShowReward] = useState(false);
@@ -68,51 +57,11 @@ export const MainScreen = () => {
 
   if (!isStarted) {
     return (
-      <div
-        style={{ position: "relative", height: "100vh", overflow: "hidden" }}
-      >
-        <Loader />
-        <Suspense fallback={null}>
-          <Canvas
-            style={{
-              background: `radial-gradient(circle, ${innerGradientColor}, ${outerGradientColor})`,
-            }}
-          >
-            <ambientLight />
-            <pointLight position={[10, 10, 10]} />
-            <Float rotation={[Math.PI / 16, Math.PI, 0]}>
-              <Lego2x2
-                position={[0, 0, 0]}
-                scale={[0.5, 0.5, 0.5]}
-                color={colors[Math.floor(Math.random() * colors.length)]}
-              />
-            </Float>
-            <Sparkles position={[0, 0, 1]} />
-          </Canvas>
-        </Suspense>
-        <TitleContainer>
-          <Title text="LESPACEGO" />
-        </TitleContainer>
-        <StartButton onClick={() => setIsStarted(true)}>Start</StartButton>
-        <ControlsContainer>
-          <h2>Controls:</h2>
-          <ul>
-            <li>
-              <h2>🖱️ to move</h2>
-            </li>
-            <li>
-              <h2>👆 CLICK/SPACE to shoot</h2>
-            </li>
-            <li>
-              <h2>⬆️ SHIFT to Hyper Speed</h2>
-            </li>
-          </ul>
-        </ControlsContainer>
-
-        <HintContainer>
-          <h6>Hint: Shoot 13 aliens to get a reward! 👽</h6>
-        </HintContainer>
-      </div>
+      <StartScreen
+        setIsStarted={setIsStarted}
+        innerGradientColor={innerGradientColor}
+        outerGradientColor={outerGradientColor}
+      />
     );
   }
   return (

@@ -11,14 +11,18 @@ type GLTFResult = GLTF & {
   };
 };
 export function Planet(
-  props: JSX.IntrinsicElements["group"] & { texture: THREE.Texture }
+  props: JSX.IntrinsicElements["group"] & {
+    texture: THREE.Texture;
+    opacity?: number;
+  }
 ) {
   const { nodes, materials } = useGLTF("/planet.glb") as GLTFResult;
 
   // Clone the material and set the map to the provided texture
   const clonedMaterial = materials["blue_and_green_planet"].clone();
   clonedMaterial.map = props.texture;
-
+  clonedMaterial.opacity = props.opacity || 1;
+  clonedMaterial.transparent = props.opacity !== undefined && props.opacity < 1;
   return (
     <group {...props} dispose={null}>
       <AnimatedLegoWrapper>
