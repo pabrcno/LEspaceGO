@@ -14,7 +14,7 @@ export const Sun = () => {
   });
   return (
     <group ref={sunRef}>
-      <Sparkles speed={0.5} scale={[40, 40, 40]} size={4} count={50} />
+      <Sparkles speed={0.5} scale={[40, 40, 40]} size={4} count={25} />
       <pointLight position={[0, 5, 0]} intensity={0.5} />
 
       <pointLight position={[25, 0, 0]} intensity={0.5} />
