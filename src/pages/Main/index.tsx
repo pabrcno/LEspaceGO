@@ -1,7 +1,7 @@
 import { Background } from "../../components/Background";
 import { Canvas } from "@react-three/fiber";
 
-import { Loader, Stats } from "@react-three/drei";
+import { Loader } from "@react-three/drei";
 
 import { ScreenContainer } from "../../styles/general.styles";
 import { useLoader } from "@react-three/fiber";
