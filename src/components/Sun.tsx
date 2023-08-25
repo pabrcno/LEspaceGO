@@ -9,7 +9,7 @@ export const Sun = () => {
   const sunRef = useRef<Group>(null);
   useFrame(() => {
     if (sunRef.current) {
-      sunRef.current.rotation.y += 0.00025;
+      sunRef.current.rotation.y += 0.0001;
     }
   });
   return (
