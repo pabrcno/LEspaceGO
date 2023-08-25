@@ -166,7 +166,7 @@ export const SolarSystem: React.FC = () => {
       <group scale={[0.025, 0.025, 0.025]}>
         <LegoRing
           scale={[2.5, 2.5, 2.5]}
-          amount={100}
+          amount={50}
           radius={600}
           rotationSpeed={0.0001}
           color="gray"
