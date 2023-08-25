@@ -15,14 +15,19 @@ export const Sun = () => {
   return (
     <group ref={sunRef}>
       <Sparkles speed={0.5} scale={[40, 40, 40]} size={4} count={25} />
-      <pointLight position={[0, 5, 0]} intensity={0.5} />
+      <pointLight position={[0, 35, 0]} intensity={0.5} />
 
-      <pointLight position={[25, 0, 0]} intensity={0.5} />
-      <pointLight position={[-25, 0, 0]} intensity={0.5} />
-      <pointLight position={[0, -25, 0]} intensity={0.5} />
-      <pointLight position={[0, 0, 25]} intensity={0.5} />
-      <pointLight position={[0, 0, -25]} intensity={0.5} />
-      <Planet opacity={1} scale={6} texture={texture[0]} position={[0, 0, 0]} />
+      <pointLight position={[35, 0, 0]} intensity={0.5} />
+      <pointLight position={[-35, 0, 0]} intensity={0.5} />
+      <pointLight position={[0, -35, 0]} intensity={0.5} />
+      <pointLight position={[0, 0, 35]} intensity={0.5} />
+      <pointLight position={[0, 0, -35]} intensity={0.5} />
+      <Planet
+        opacity={0.9}
+        scale={6}
+        texture={texture[0]}
+        position={[0, 0, 0]}
+      />
     </group>
   );
 };
