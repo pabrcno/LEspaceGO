@@ -24,7 +24,7 @@ export const StartButton = styled.button`
   position: absolute;
   font-family: "VCR", sans-serif;
 
-  bottom: 10%;
+  bottom: 15%;
   left: 50%;
   transform: translateX(-50%);
   padding: 10px 50px;

@@ -6,8 +6,9 @@ import { Planet } from "./Planet";
 import { textureUris } from "../constants";
 import { OrbitControls, Stars } from "@react-three/drei";
 import { LegoRing } from "./LegoRing";
-
+import * as THREE from "three";
 import { Group } from "three/src/objects/Group.js";
+import { Sun } from "./Sun";
 
 type TPlanetData = {
   name: string;
@@ -134,14 +135,14 @@ const AnimatedPlanet: React.FC<PlanetProps> = ({
             scale={[1, 1, 1]}
             amount={10}
             radius={20}
-            rotationSpeed={0.01}
+            rotationSpeed={-0.005}
             color="gray"
           />
           <LegoRing
             scale={[1, 1, 1]}
             amount={15}
             radius={30}
-            rotationSpeed={0.005}
+            rotationSpeed={-0.005}
             color="gray"
           />
         </>
@@ -162,9 +163,14 @@ export const SolarSystem: React.FC = () => {
         cursor: "grab",
       }}
     >
-      <camera position={[0, 0, -10]} />
-
-      <group scale={[0.05, 0.05, 0.05]}>
+      <group scale={[0.025, 0.025, 0.025]}>
+        <LegoRing
+          scale={[2.5, 2.5, 2.5]}
+          amount={100}
+          radius={600}
+          rotationSpeed={0.0001}
+          color="gray"
+        />
         <Stars
           radius={100}
           depth={200}
@@ -175,45 +181,7 @@ export const SolarSystem: React.FC = () => {
         {
           //sun
         }
-        <group>
-          <pointLight
-            position={[0, 25, 0]}
-            scale={[20, 20, 20]}
-            intensity={0.5}
-          />
-
-          <pointLight
-            position={[25, 0, 0]}
-            scale={[20, 20, 20]}
-            intensity={0.5}
-          />
-          <pointLight
-            position={[-25, 0, 0]}
-            scale={[20, 20, 20]}
-            intensity={0.5}
-          />
-          <pointLight
-            position={[0, -25, 0]}
-            scale={[20, 20, 20]}
-            intensity={0.5}
-          />
-          <pointLight
-            position={[0, 0, 25]}
-            scale={[20, 20, 20]}
-            intensity={0.5}
-          />
-          <pointLight
-            position={[0, 0, -25]}
-            scale={[20, 20, 20]}
-            intensity={0.5}
-          />
-          <Planet
-            opacity={1}
-            scale={6}
-            texture={textures[1]}
-            position={[0, 0, 0]}
-          />
-        </group>
+        <Sun />
         {planetData.map((planet, index) => {
           return (
             <AnimatedPlanet

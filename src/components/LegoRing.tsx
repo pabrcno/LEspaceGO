@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Lego1x1 } from "./legos/Lego1x1";
 import { Group } from "three";
+import { Float } from "@react-three/drei";
 
 type LegoRingProps = {
   amount: number;
@@ -36,7 +37,9 @@ export const LegoRing: React.FC<LegoRingProps> = ({
     const z = radius * Math.sin(angle);
 
     legos.push(
-      <Lego1x1 key={i} position={[x, 0, z]} color={color} scale={scale} />
+      <Float>
+        <Lego1x1 key={i} position={[x, 0, z]} color={color} scale={scale} />
+      </Float>
     );
   }
 
