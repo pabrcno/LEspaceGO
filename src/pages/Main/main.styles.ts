@@ -40,9 +40,9 @@ export const HintContainer = styled.div`
   position: absolute;
   font-family: "VCR", sans-serif;
 
-  bottom: 0;
+  bottom: 10%;
   right: 0;
-  padding: 10px;
+  padding: 0px 50px;
   font-size: 1.5em;
 
   background: transparent;
