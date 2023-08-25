@@ -49,7 +49,7 @@ export function SpaceShip(): JSX.Element {
         .filter((laser) => laser.z > camera.position.z - 20)
         .map((laser) => {
           const updatedLaser = laser.clone();
-          updatedLaser.z -= 0.5;
+          updatedLaser.z -= 0.6;
           return updatedLaser;
         })
     );
