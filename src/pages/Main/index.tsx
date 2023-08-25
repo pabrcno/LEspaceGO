@@ -69,7 +69,7 @@ export const MainScreen = () => {
       {
         <>
           <Loader />
-          <Stats />
+
           <Suspense fallback={null}>
             <Canvas
               style={{
