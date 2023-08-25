@@ -1,7 +1,7 @@
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
-import { AnimatedLegoWrapper } from "./AnimatedLegoWrapper";
+import { AnimatedLegoWrapper } from "../AnimatedLegoWrapper";
 
 type GLTFResult = GLTF & {
   nodes: {

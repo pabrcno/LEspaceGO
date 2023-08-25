@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Lego1x1 } from "./Lego1x1";
+import { Lego1x1 } from "./legos/Lego1x1";
 import { Group } from "three";
 
 type LegoRingProps = {

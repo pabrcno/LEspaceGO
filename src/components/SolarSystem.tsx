@@ -2,10 +2,10 @@ import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import { useLoader } from "@react-three/fiber";
-import { Planet } from "./legos/Planet";
+import { Planet } from "./Planet";
 import { textureUris } from "../constants";
 import { OrbitControls, Stars } from "@react-three/drei";
-import { LegoRing } from "./legos/LegoRing";
+import { LegoRing } from "./LegoRing";
 
 import { Group } from "three/src/objects/Group.js";
 
@@ -18,70 +18,70 @@ type TPlanetData = {
   textureUri: string;
 };
 
+const orbitBrake = 2;
 const planetData: TPlanetData[] = [
   {
     name: "mercury",
     scale: 0.283,
-    orbitRadius: 40,
+    orbitRadius: 60,
     rotationSpeed: 0.005,
-    orbitSpeed: 0.2,
+    orbitSpeed: 4.17 / orbitBrake,
     textureUri: textureUris.mercury,
   },
   {
     name: "venus",
     scale: 0.949,
-    orbitRadius: 60,
+    orbitRadius: 90,
     rotationSpeed: 0.004,
-    orbitSpeed: 0.16,
+    orbitSpeed: 1.61 / orbitBrake,
     textureUri: textureUris.venus,
   },
   {
     name: "earth",
     scale: 1,
-    orbitRadius: 80,
+    orbitRadius: 130,
     rotationSpeed: 0.003,
-    orbitSpeed: 0.14,
+    orbitSpeed: 1 / orbitBrake,
     textureUri: textureUris.earth,
   },
   {
     name: "mars",
     scale: 0.532,
-    orbitRadius: 100,
+    orbitRadius: 180,
     rotationSpeed: 0.002,
-    orbitSpeed: 0.12,
+    orbitSpeed: 0.53 / orbitBrake,
     textureUri: textureUris.mars,
   },
-
   {
     name: "jupiter",
     scale: 4,
-    orbitRadius: 150, // Adjusted
+    orbitRadius: 210,
     rotationSpeed: 0.001,
-    orbitSpeed: 0.1,
+    orbitSpeed: 0.08 / orbitBrake,
     textureUri: textureUris.jupiter,
   },
   {
     name: "saturn",
     scale: 3,
-    orbitRadius: 210, // Adjusted
+    orbitRadius: 280,
     rotationSpeed: 0.0009,
-    orbitSpeed: 0.08,
+    orbitSpeed: 0.03 / orbitBrake,
     textureUri: textureUris.saturn,
   },
   {
     name: "uranus",
     scale: 2,
-    orbitRadius: 280, // Adjusted
+    orbitRadius: 320,
     rotationSpeed: 0.0008,
-    orbitSpeed: 0.06,
+    orbitSpeed: 0.01 / orbitBrake,
     textureUri: textureUris.uranus,
   },
   {
     name: "neptune",
     scale: 1.9,
-    orbitRadius: 360, // Adjusted
+    orbitRadius: 360,
     rotationSpeed: 0.0007,
-    orbitSpeed: 0.04,
+    orbitSpeed: 0.006 / orbitBrake,
     textureUri: textureUris.neptune,
   },
 ];

@@ -1,21 +1,21 @@
 import { Background } from "../../components/Background";
 import { Canvas } from "@react-three/fiber";
 
-import { Float, Loader, Stats } from "@react-three/drei";
+import { Loader, Stats } from "@react-three/drei";
 
 import { ScreenContainer } from "../../styles/general.styles";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import { useTheme } from "../../hooks/useTheme";
 import { SpaceShip } from "../../components/SpaceShip";
-import { Planet } from "../../components/legos/Planet";
-import { Alien } from "../../components/legos/Alien";
+import { Planet } from "../../components/Planet";
+import { Alien } from "../../components/Alien";
 import { Suspense, useEffect, useRef, useState } from "react";
 
-import { StartButton } from "./main.styles";
 import { colors, textureUris } from "../../constants";
 
 import { StartScreen } from "./StartScreen";
+import RewardModal from "../../components/RewardModal";
 
 export const MainScreen = () => {
   const { theme } = useTheme();
@@ -126,65 +126,7 @@ export const MainScreen = () => {
               />
             </Canvas>
           </Suspense>
-          {showReward && (
-            <>
-              <div
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  color: "white",
-
-                  display: "flex",
-                  flexDirection: "column",
-                  zIndex: 2,
-                }}
-              >
-                <Canvas>
-                  <Suspense fallback={null}>
-                    <ambientLight />
-                    <directionalLight position={[0, 2, 0]} />
-                    <Float>
-                      <group scale={[1.2, 1.2, 1.2]}>
-                        <Alien
-                          handleAlienHit={() => {
-                            return;
-                          }}
-                        />
-                      </group>
-                    </Float>
-                  </Suspense>
-                </Canvas>
-                <h1>🎉 Congrats! You won a reward! 🎉</h1>
-                <div
-                  style={{
-                    marginTop: 100,
-                  }}
-                >
-                  <a href="/meshes/alien.glb" download>
-                    <StartButton> Get</StartButton>
-                  </a>
-                </div>
-              </div>
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "10%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  color: "white",
-
-                  display: "flex",
-                  flexDirection: "row",
-                }}
-              >
-                <StartButton onClick={() => setShowReward(false)}>
-                  Close
-                </StartButton>
-              </div>
-            </>
-          )}
+          {showReward && <RewardModal setShowReward={setShowReward} />}
           <audio ref={audioRef} loop>
             <source src="/background.wav" type="audio/mpeg" />
           </audio>

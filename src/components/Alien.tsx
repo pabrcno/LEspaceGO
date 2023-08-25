@@ -7,7 +7,7 @@ import { Float, useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 import { useFrame } from "@react-three/fiber";
-import { Explosion } from "../Explosion";
+import { Explosion } from "./Explosion";
 import { a, useSpring } from "@react-spring/three";
 import { LegoRing } from "./LegoRing";
 
