@@ -58,7 +58,7 @@ export const HintContainer = styled.div`
 
 export const TitleContainer = styled.div`
   position: absolute;
-  top: 20%;
+  top: 15%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
