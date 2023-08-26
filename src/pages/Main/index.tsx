@@ -40,7 +40,7 @@ export const MainScreen = () => {
     if (!audioRef.current) return;
     audioRef.current.volume = 1;
 
-    audioRef.current.play().catch((err) => console.error(err));
+    // audioRef.current.play().catch((err) => console.error(err));
   }, [isStarted]); //
   const textures = useLoader(
     TextureLoader,

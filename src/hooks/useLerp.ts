@@ -41,7 +41,7 @@ export function useLerp({
     };
   }, [delay]);
 
-  useFrame(({ mouse, viewport: { width, height }, camera }) => {
+  useFrame(({ mouse, viewport: { width, height } }) => {
     if (!mainBoxRef.current || !shouldUpdate) return;
 
     // Target rotation and position based on mouse movement
