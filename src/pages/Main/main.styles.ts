@@ -7,6 +7,7 @@ export const ControlsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: -1;
 
   bottom: 0;
   left: 0;

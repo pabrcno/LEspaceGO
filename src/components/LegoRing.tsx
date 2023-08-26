@@ -37,7 +37,7 @@ export const LegoRing: React.FC<LegoRingProps> = ({
     const z = radius * Math.sin(angle);
 
     legos.push(
-      <Float>
+      <Float key={`${i}-lego-ring`}>
         <Lego1x1 key={i} position={[x, 0, z]} color={color} scale={scale} />
       </Float>
     );

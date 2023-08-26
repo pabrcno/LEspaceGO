@@ -16,14 +16,17 @@ type meshBackgroundProps = {
   deactivateScroll?: boolean;
 };
 
-export const Background = ({ meshes }: meshBackgroundProps) => {
+export const Background = ({
+  meshes,
+  deactivateScroll,
+}: meshBackgroundProps) => {
   const positionedMeshes = useMeshBackgroundPositioning(meshes);
   const { speed, rotationIntensity, floatIntensity } = {
     speed: 0.1,
     rotationIntensity: 5,
     floatIntensity: 5,
   };
-  const { speed: scrollSpeed } = useAutoZScrolling();
+  const { speed: scrollSpeed } = useAutoZScrolling(deactivateScroll);
 
   const { camera } = useThree();
 

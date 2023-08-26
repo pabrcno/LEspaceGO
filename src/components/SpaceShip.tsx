@@ -3,7 +3,8 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { Box } from "@react-three/drei";
 import * as THREE from "three";
 import { SpaceshipMesh } from "./SpaceShipMesh";
-function lerp(current: number, target: number, factor: number) {
+
+export function lerp(current: number, target: number, factor: number) {
   return current + factor * (target - current);
 }
 export function SpaceShip(): JSX.Element {
