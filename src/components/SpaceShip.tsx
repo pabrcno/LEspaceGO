@@ -34,7 +34,7 @@ export function SpaceShip(): JSX.Element {
   const prevRotationY = useRef(0);
   const prevPositionX = useRef(0);
   const prevPositionY = useRef(0);
-  const lerpFactor = 0.05;
+  const lerpFactor = 0.025;
   useFrame(({ mouse, viewport: { width, height } }) => {
     if (!mainBoxRef.current) return;
 
