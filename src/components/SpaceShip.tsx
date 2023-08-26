@@ -3,7 +3,9 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { Box } from "@react-three/drei";
 import * as THREE from "three";
 import { SpaceshipMesh } from "./SpaceShipMesh";
-
+function lerp(current: number, target: number, factor: number) {
+  return current + factor * (target - current);
+}
 export function SpaceShip(): JSX.Element {
   const [lasers, setLasers] = useState<THREE.Vector3[]>([]);
   const mainBoxRef = useRef<THREE.Mesh>(null);
@@ -28,21 +30,55 @@ export function SpaceShip(): JSX.Element {
     legoSound.play().catch((err) => console.error(err));
     shotSound.play().catch((err) => console.error(err));
   };
-
+  const prevRotationX = useRef(Math.PI / 2);
+  const prevRotationY = useRef(0);
+  const prevPositionX = useRef(0);
+  const prevPositionY = useRef(0);
+  const lerpFactor = 0.05;
   useFrame(({ mouse, viewport: { width, height } }) => {
     if (!mainBoxRef.current) return;
 
-    // Rotation based on mouse movement
-    mainBoxRef.current.rotation.set(
-      Math.PI / 2 + mouse.y * 0.25,
-      mouse.x * Math.PI * 0.25,
-      -Math.PI
+    // Target rotation and position based on mouse movement
+    const targetRotationX = Math.PI / 2 + mouse.y * 0.25;
+    const targetRotationY = mouse.x * Math.PI * 0.25;
+    const targetPositionX = mouse.x * width;
+    const targetPositionY = mouse.y * height;
+
+    // Damping: Use lerp to calculate the new rotation and position
+    const newRotationX = lerp(
+      prevRotationX.current,
+      targetRotationX,
+      lerpFactor
     );
+    const newRotationY = lerp(
+      prevRotationY.current,
+      targetRotationY,
+      lerpFactor
+    );
+    const newPositionX = lerp(
+      prevPositionX.current,
+      targetPositionX,
+      lerpFactor
+    );
+    const newPositionY = lerp(
+      prevPositionY.current,
+      targetPositionY,
+      lerpFactor
+    );
+
+    // Apply the calculated rotation and position to the box
+    mainBoxRef.current.rotation.set(newRotationX, newRotationY, -Math.PI);
     mainBoxRef.current.position.set(
-      mouse.x * width,
-      mouse.y * height,
+      newPositionX,
+      newPositionY,
       camera.position.z - 3.5
     );
+
+    // Store the new values for the next frame
+    prevRotationX.current = newRotationX;
+    prevRotationY.current = newRotationY;
+    prevPositionX.current = newPositionX;
+    prevPositionY.current = newPositionY;
     // Update lasers position
     setLasers((prevLasers) =>
       prevLasers
