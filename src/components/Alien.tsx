@@ -52,6 +52,7 @@ export function Alien(
           setIsHit(true);
 
           scene.remove(laser);
+
           props.handleAlienHit();
           setTimeout(() => {
             if (!alienRef.current) return;
