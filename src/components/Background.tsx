@@ -23,7 +23,7 @@ export const Background = ({
   const positionedMeshes = useMeshBackgroundPositioning(meshes);
   const { speed, rotationIntensity, floatIntensity } = {
     speed: 0.1,
-    rotationIntensity: 5,
+    rotationIntensity: 2,
     floatIntensity: 5,
   };
   const { speed: scrollSpeed } = useAutoZScrolling(deactivateScroll);
