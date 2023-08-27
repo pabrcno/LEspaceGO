@@ -15,11 +15,41 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { colors, textureUris } from "../../constants";
 
 import { StartScreen } from "./StartScreen";
-import RewardModal from "../../components/RewardModal";
+
+import { useSnackbar } from "notistack";
+import { DownloadButton } from "./main.styles";
 
 export const MainScreen = () => {
   const { theme } = useTheme();
   const audioRef = useRef<HTMLAudioElement>(null);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  const handleClick = () => {
+    const downloadLink = document.createElement("a");
+    downloadLink.href = "/alien.glb";
+    downloadLink.download = "alien.glb";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
+
+  const showNotification = () => {
+    enqueueSnackbar("Click here to download your reward!", {
+      variant: "success",
+      action: (key) => (
+        <>
+          <DownloadButton
+            onClick={() => {
+              handleClick();
+              closeSnackbar(key);
+            }}
+          >
+            Download
+          </DownloadButton>
+        </>
+      ),
+    });
+  };
 
   const {
     bgMeshScale,
@@ -52,7 +82,7 @@ export const MainScreen = () => {
   // const [isKraken, setIsKraken] = useState(false);
   const handleAlienCount = () => {
     alienCountRef.current += 1;
-    if (alienCountRef.current === 13) {
+    if (alienCountRef.current === 2) {
       setShowReward(true);
     }
   };
@@ -129,7 +159,7 @@ export const MainScreen = () => {
               {/* <Kraken show={isKraken} /> */}
             </Canvas>
           </Suspense>
-          {showReward && <RewardModal setShowReward={setShowReward} />}
+          {showReward && showNotification()}
           <audio ref={audioRef} loop>
             <source src="/background.wav" type="audio/mpeg" />
           </audio>

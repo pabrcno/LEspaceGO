@@ -21,6 +21,18 @@ export const ControlsContainer = styled.div`
   }
 `;
 
+export const DownloadButton = styled.button`
+  font-family: "VCR", sans-serif;
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  border-radius: 20px;
+  padding: 10px 50px;
+
+  cursor: pointer;
+  margin: 10px;
+`;
+
 export const StartButton = styled.button`
   position: absolute;
   font-family: "VCR", sans-serif;
