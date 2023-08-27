@@ -5,8 +5,8 @@ const MIN_DISTANCE = 5;
 
 export const useMeshBackgroundPositioning = (meshes: JSX.Element[]) => {
   const { viewport } = useThree();
-  const MAX_RANGE = viewport.width * 0.8;
-  const MAX_RANGE_Y = viewport.height * 0.5;
+  const MAX_RANGE = viewport.width * 0.35;
+  const MAX_RANGE_Y = viewport.height * 0.35;
   const [positions, setPositions] = useState<[number, number, number][]>([]);
   const { camera } = useThree();
 

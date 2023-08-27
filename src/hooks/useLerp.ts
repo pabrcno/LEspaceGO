@@ -41,7 +41,7 @@ export function useLerp({
     };
   }, [delay]);
 
-  useFrame(({ mouse, viewport: { width, height } }) => {
+  useFrame(({ mouse, viewport: { width, height }, camera }) => {
     if (!mainBoxRef.current || !shouldUpdate) return;
 
     // Target rotation and position based on mouse movement
@@ -58,14 +58,18 @@ export function useLerp({
 
     // Apply the calculated rotation and position to the box
     mainBoxRef.current.rotation.set(newRotationX, newRotationY, -Math.PI);
-    mainBoxRef.current.position.x = newPositionX * 0.25;
-    mainBoxRef.current.position.y = newPositionY * 0.25;
+    mainBoxRef.current.position.x = newPositionX * 0.35;
+    mainBoxRef.current.position.y = newPositionY * 0.35;
 
     // Store the new values for the next frame
     prevRotationX.current = newRotationX;
     prevRotationY.current = newRotationY;
     prevPositionX.current = newPositionX;
     prevPositionY.current = newPositionY;
+    camera.rotation.y = -newPositionX * 0.05;
+    camera.rotation.x = newPositionY * 0.05;
+
+    camera.updateProjectionMatrix();
   });
 
   return { mainBoxRef };
