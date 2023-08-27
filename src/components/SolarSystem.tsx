@@ -19,7 +19,7 @@ type TPlanetData = {
   textureUri: string;
 };
 
-const orbitBrake = 2;
+const orbitBrake = 4;
 const planetData: TPlanetData[] = [
   {
     name: "mercury",
