@@ -33,7 +33,7 @@ export function Kraken(
   useFrame(({ camera, scene }) => {
     if (!krakenRef.mainBoxRef.current) return;
 
-    const desiredPosition = camera.position.z - 5;
+    const desiredPosition = camera.position.z - 8;
     const hiddenPosition = camera.position.z - 40;
 
     // Check if Kraken has reached the desired position

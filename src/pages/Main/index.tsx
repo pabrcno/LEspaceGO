@@ -121,7 +121,7 @@ export const MainScreen = () => {
                   ...Array.from({ length: 15 }, (_, factorIndex) => (
                     <Alien
                       key={`${factorIndex}-alien`}
-                      scale={bgMeshScale * 2}
+                      scale={bgMeshScale}
                       handleAlienHit={handleAlienCount}
                     />
                   )),

@@ -1,27 +1,23 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { Box } from "@react-three/drei";
-import * as THREE from "three";
 import { SpaceshipMesh } from "./SpaceShipMesh";
+import { useLerp } from "../hooks/useLerp";
+import * as THREE from "three";
 
-export function lerp(current: number, target: number, factor: number) {
-  return current + factor * (target - current);
-}
 export function SpaceShip(): JSX.Element {
   const [lasers, setLasers] = useState<THREE.Vector3[]>([]);
-  const mainBoxRef = useRef<THREE.Mesh>(null);
-  const { camera } = useThree();
   const shotSound = useMemo(() => new Audio("/laser-shot.wav"), []);
   const legoSound = useMemo(() => new Audio("/lego-click.wav"), []);
+
+  const { mainBoxRef } = useLerp(); // Use the custom hook to get the reference
 
   const handleShoot = () => {
     if (!mainBoxRef.current) return;
 
-    // Get the spaceship's current position and orientation
     const shipPosition = mainBoxRef.current.position.clone();
     const shipQuaternion = mainBoxRef.current.quaternion.clone();
 
-    // Offset laser start position based on orientation
     const offset = new THREE.Vector3(0, 0, 0).applyQuaternion(shipQuaternion);
     const shootPosition = shipPosition.add(offset);
 
@@ -31,56 +27,11 @@ export function SpaceShip(): JSX.Element {
     legoSound.play().catch((err) => console.error(err));
     shotSound.play().catch((err) => console.error(err));
   };
-  const prevRotationX = useRef(Math.PI / 2);
-  const prevRotationY = useRef(0);
-  const prevPositionX = useRef(0);
-  const prevPositionY = useRef(0);
-  const lerpFactor = 0.025;
-  useFrame(({ mouse, viewport: { width, height } }) => {
+
+  useFrame(({ camera }) => {
     if (!mainBoxRef.current) return;
+    mainBoxRef.current.position.z = camera.position.z - 4;
 
-    // Target rotation and position based on mouse movement
-    const targetRotationX = Math.PI / 2 + mouse.y * 0.25;
-    const targetRotationY = mouse.x * Math.PI * 0.25;
-    const targetPositionX = mouse.x * width;
-    const targetPositionY = mouse.y * height;
-
-    // Damping: Use lerp to calculate the new rotation and position
-    const newRotationX = lerp(
-      prevRotationX.current,
-      targetRotationX,
-      lerpFactor
-    );
-    const newRotationY = lerp(
-      prevRotationY.current,
-      targetRotationY,
-      lerpFactor
-    );
-    const newPositionX = lerp(
-      prevPositionX.current,
-      targetPositionX,
-      lerpFactor
-    );
-    const newPositionY = lerp(
-      prevPositionY.current,
-      targetPositionY,
-      lerpFactor
-    );
-
-    // Apply the calculated rotation and position to the box
-    mainBoxRef.current.rotation.set(newRotationX, newRotationY, -Math.PI);
-    mainBoxRef.current.position.set(
-      newPositionX,
-      newPositionY,
-      camera.position.z - 3.5
-    );
-
-    // Store the new values for the next frame
-    prevRotationX.current = newRotationX;
-    prevRotationY.current = newRotationY;
-    prevPositionX.current = newPositionX;
-    prevPositionY.current = newPositionY;
-    // Update lasers position
     setLasers((prevLasers) =>
       prevLasers
         .filter((laser) => laser.z > camera.position.z - 15)
@@ -100,7 +51,6 @@ export function SpaceShip(): JSX.Element {
     };
 
     window.addEventListener("keydown", onKeyDown);
-
     window.addEventListener("click", handleShoot);
 
     return () => {
