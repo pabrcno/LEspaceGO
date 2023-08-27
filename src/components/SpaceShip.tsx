@@ -84,7 +84,7 @@ export function SpaceShip(): JSX.Element {
         lineWidth={0.2}
         segments={true}
         dashed={true}
-        dashSize={0.1}
+        dashSize={0.05}
         // @ts-expect-error - [ts] Property 'ref' does not exist on type 'IntrinsicAttributes & IntrinsicClassAttributes<Line> & Readonly<{ children?: ReactNode; }>'.
         ref={aimRef}
       />
