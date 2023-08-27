@@ -77,13 +77,12 @@ export const MainScreen = () => {
   ) as THREE.Texture[];
 
   const alienCountRef = useRef(0);
-  const [showReward, setShowReward] = useState(false);
 
   // const [isKraken, setIsKraken] = useState(false);
   const handleAlienCount = () => {
     alienCountRef.current += 1;
-    if (alienCountRef.current === 2) {
-      setShowReward(true);
+    if (alienCountRef.current === 13) {
+      showNotification();
     }
   };
 
@@ -159,7 +158,7 @@ export const MainScreen = () => {
               {/* <Kraken show={isKraken} /> */}
             </Canvas>
           </Suspense>
-          {showReward && showNotification()}
+
           <audio ref={audioRef} loop>
             <source src="/background.wav" type="audio/mpeg" />
           </audio>
