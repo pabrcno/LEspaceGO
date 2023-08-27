@@ -58,8 +58,8 @@ export function useLerp({
 
     // Apply the calculated rotation and position to the box
     mainBoxRef.current.rotation.set(newRotationX, newRotationY, -Math.PI);
-    mainBoxRef.current.position.x = newPositionX;
-    mainBoxRef.current.position.y = newPositionY;
+    mainBoxRef.current.position.x = newPositionX * 0.25;
+    mainBoxRef.current.position.y = newPositionY * 0.25;
 
     // Store the new values for the next frame
     prevRotationX.current = newRotationX;

@@ -16,7 +16,6 @@ import { colors, textureUris } from "../../constants";
 
 import { StartScreen } from "./StartScreen";
 import RewardModal from "../../components/RewardModal";
-import { Kraken } from "../../components/Kraken";
 
 export const MainScreen = () => {
   const { theme } = useTheme();
@@ -50,11 +49,11 @@ export const MainScreen = () => {
   const alienCountRef = useRef(0);
   const [showReward, setShowReward] = useState(false);
 
-  const [isKraken, setIsKraken] = useState(false);
+  // const [isKraken, setIsKraken] = useState(false);
   const handleAlienCount = () => {
     alienCountRef.current += 1;
-    if (alienCountRef.current === 2 && !isKraken) {
-      setIsKraken(true);
+    if (alienCountRef.current === 13) {
+      setShowReward(true);
     }
   };
 
@@ -121,13 +120,13 @@ export const MainScreen = () => {
                   ...Array.from({ length: 15 }, (_, factorIndex) => (
                     <Alien
                       key={`${factorIndex}-alien`}
-                      scale={bgMeshScale}
+                      scale={bgMeshScale * 1.5}
                       handleAlienHit={handleAlienCount}
                     />
                   )),
                 ]}
               />
-              <Kraken show={isKraken} />
+              {/* <Kraken show={isKraken} /> */}
             </Canvas>
           </Suspense>
           {showReward && <RewardModal setShowReward={setShowReward} />}
