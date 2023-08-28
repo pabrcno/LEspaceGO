@@ -10,7 +10,7 @@ export function SpaceShip(): JSX.Element {
   const [lasers, setLasers] = useState<THREE.Vector3[]>([]);
   const shotSound = useMemo(() => new Audio("/laser-shot.wav"), []);
   const legoSound = useMemo(() => new Audio("/lego-click.wav"), []);
-  const { mainBoxRef } = useLerp(); // Use the custom hook to get the reference
+  const { mainBoxRef } = useLerp({ moveCamera: true }); // Use the custom hook to get the reference
 
   const aimRef = useRef<THREE.Mesh>(null);
 

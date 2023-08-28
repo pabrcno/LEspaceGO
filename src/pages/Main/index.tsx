@@ -18,6 +18,7 @@ import { StartScreen } from "./StartScreen";
 
 import { useSnackbar } from "notistack";
 import { DownloadButton } from "./main.styles";
+import { Squid } from "../../components/Squid";
 
 export const MainScreen = () => {
   const { theme } = useTheme();
@@ -155,7 +156,7 @@ export const MainScreen = () => {
                   )),
                 ]}
               />
-              {/* <Kraken show={isKraken} /> */}
+              <Squid />
             </Canvas>
           </Suspense>
 

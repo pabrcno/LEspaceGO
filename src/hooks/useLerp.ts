@@ -15,6 +15,7 @@ type LerpParameters = {
   offsetY?: number;
   factor?: number;
   delay?: number; // in milliseconds
+  moveCamera?: boolean;
 };
 
 export function useLerp({
@@ -22,6 +23,7 @@ export function useLerp({
   offsetY = 0,
   factor = 0.025,
   delay = 0,
+  moveCamera = false,
 }: LerpParameters = {}): LerpResults {
   const mainBoxRef = useRef<THREE.Object3D | null>(null);
   const [shouldUpdate, setShouldUpdate] = useState<boolean>(false);
@@ -66,10 +68,12 @@ export function useLerp({
     prevRotationY.current = newRotationY;
     prevPositionX.current = newPositionX;
     prevPositionY.current = newPositionY;
-    camera.rotation.y = -newPositionX * 0.05;
-    camera.rotation.x = newPositionY * 0.05;
+    if (moveCamera) {
+      camera.rotation.y = -newPositionX * 0.05;
+      camera.rotation.x = newPositionY * 0.05;
 
-    camera.updateProjectionMatrix();
+      camera.updateProjectionMatrix();
+    }
   });
 
   return { mainBoxRef };
