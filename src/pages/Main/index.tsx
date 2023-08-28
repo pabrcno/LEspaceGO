@@ -34,8 +34,9 @@ export const MainScreen = () => {
   };
 
   const showNotification = () => {
-    enqueueSnackbar("Click here to download your reward!", {
+    enqueueSnackbar("Great! You won a reward! 🎊", {
       variant: "success",
+      autoHideDuration: 10000,
       action: (key) => (
         <>
           <DownloadButton
