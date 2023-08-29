@@ -161,9 +161,9 @@ const AnimatedPersecution: React.FC = () => {
   useFrame(() => {
     if (alienRef.current && spaceshipRef.current) {
       // Define the alien's sinusoidal motion.
-      const alienX = 100 * Math.sin(time) + 100; // Horizontal motion.
-      const alienZ = 50 * Math.cos(time) * Math.sin(time) + 10; // Forward motion.
-      const alienY = 10 * Math.sin(time) + 20; // Vertical motion.
+      const alienX = 250 * Math.sin(time) + 100; // Horizontal motion.
+      const alienZ = 100 * Math.cos(time) * Math.sin(time) + 10; // Forward motion.
+      const alienY = 50 * Math.sin(time) + 20; // Vertical motion.
 
       alienRef.current.position.set(alienX, alienY, alienZ);
 
@@ -174,7 +174,7 @@ const AnimatedPersecution: React.FC = () => {
       );
 
       direction.normalize();
-      const chaseSpeed = 0.3; // Adjusted for the spaceship's chasing speed.
+      const chaseSpeed = 0.75; // Adjusted for the spaceship's chasing speed.
       direction.multiplyScalar(chaseSpeed);
       spaceshipRef.current.position.add(direction);
 
