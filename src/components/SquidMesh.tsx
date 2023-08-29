@@ -73,14 +73,10 @@ export function SquidMesh(props: JSX.IntrinsicElements["group"]) {
       ref={group as Ref<THREE.Group>}
       {...props}
       dispose={null}
-      scale={[0.1, 0.1, 0.1]}
+      scale={props.scale ?? [0.1, 0.1, 0.1]}
     >
       <group name="Scene">
-        <group
-          name="Sketchfab_model"
-          position={[22.298, 0, 0]}
-          rotation={[-Math.PI / 2, 0, 0]}
-        >
+        <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
           <group name="LPOBJcleanermaterialmergergles" />
         </group>
         <group

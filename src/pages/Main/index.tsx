@@ -18,7 +18,7 @@ import { StartScreen } from "./StartScreen";
 
 import { useSnackbar } from "notistack";
 import { DownloadButton } from "./main.styles";
-import { Squid } from "../../components/Squid";
+import { SquidMesh } from "../../components/SquidMesh";
 
 export const MainScreen = () => {
   const { theme } = useTheme();
@@ -154,9 +154,14 @@ export const MainScreen = () => {
                       handleAlienHit={handleAlienCount}
                     />
                   )),
+                  ...Array.from({ length: 6 }, (_, factorIndex) => (
+                    <SquidMesh
+                      key={`${factorIndex}-squid`}
+                      scale={[0.005, 0.005, 0.005]}
+                    />
+                  )),
                 ]}
               />
-              <Squid />
             </Canvas>
           </Suspense>
 
