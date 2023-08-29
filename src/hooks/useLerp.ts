@@ -69,7 +69,7 @@ export function useLerp({
     prevPositionX.current = newPositionX;
     prevPositionY.current = newPositionY;
     if (moveCamera) {
-      camera.rotation.y = -newPositionX * 0.05;
+      camera.rotation.y = -newPositionX * 0.1;
       camera.rotation.x = newPositionY * 0.05;
 
       camera.updateProjectionMatrix();

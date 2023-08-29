@@ -23,7 +23,7 @@ export const Background = ({
   const positionedMeshes = useMeshBackgroundPositioning(meshes);
   const { speed, rotationIntensity, floatIntensity } = {
     speed: 0.1,
-    rotationIntensity: 2,
+    rotationIntensity: 4,
     floatIntensity: 5,
   };
   const { speed: scrollSpeed } = useAutoZScrolling(deactivateScroll);
@@ -38,7 +38,9 @@ export const Background = ({
       {positionedMeshes.map((mesh, index) => (
         <Float
           speed={speed}
-          rotationIntensity={rotationIntensity / cameraFactor}
+          rotationIntensity={
+            rotationIntensity / cameraFactor + (speed > 0.1 ? 10 : 0)
+          }
           floatIntensity={floatIntensity}
           key={index}
           floatingRange={[-0.1, 0.1]}
