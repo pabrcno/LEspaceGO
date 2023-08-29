@@ -159,7 +159,6 @@ const AnimatedPersecution: React.FC = () => {
   let time = 0;
 
   useFrame(({ camera }) => {
-    console.log(camera.position);
     if (alienRef.current && spaceshipRef.current) {
       // Define the alien's sinusoidal motion.
       const alienX = 250 * Math.sin(time) + 100; // Horizontal motion.
