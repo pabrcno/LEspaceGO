@@ -27,7 +27,7 @@ export const StartScreen: FC<StartScreenProps> = ({ setIsStarted }) => {
         <SolarSystem />
       </Suspense>
       <TitleContainer>
-        <Title text="LESPACEGO" />
+        <Title text="LE-SPACE-GO" />
       </TitleContainer>
       <StartButton onClick={() => setIsStarted(true)}>Start</StartButton>
       <ControlsContainer>
@@ -37,7 +37,7 @@ export const StartScreen: FC<StartScreenProps> = ({ setIsStarted }) => {
             <h2>🖱️ to move</h2>
           </li>
           <li>
-            <h2>👆 CLICK/SPACE to shoot</h2>
+            <h2>👆 SPACE/CLICK to shoot</h2>
           </li>
           <li>
             <h2>⬆️ SHIFT to Hyper Speed</h2>
@@ -46,7 +46,7 @@ export const StartScreen: FC<StartScreenProps> = ({ setIsStarted }) => {
       </ControlsContainer>
 
       <HintContainer>
-        <h6>Hint: Shoot 13 aliens to get a reward! 👽</h6>
+        <h6>Hint: Shoot 13 aliens! 🛸</h6>
       </HintContainer>
     </div>
   );

@@ -12,12 +12,12 @@ interface ColorfulH1Props {
 
 export const Title: React.FC<ColorfulH1Props> = ({ text }) => {
   return (
-    <h1>
+    <h2>
       {text.split("").map((char, index) => (
         <ColorfulSpan key={index} color={colors[index % colors.length]}>
           {char}
         </ColorfulSpan>
       ))}
-    </h1>
+    </h2>
   );
 };
