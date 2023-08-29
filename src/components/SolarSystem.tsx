@@ -157,16 +157,27 @@ const AnimatedPersecution: React.FC = () => {
   const spaceshipRef = useRef<THREE.Group>(null);
 
   let time = 0;
+  // Variables to randomize the motion
+
+  const frequencyMultiplierRef = useRef<number>(Math.random() * 0.5 + 0.5); // between 0.5 and 1
+  const magnitudeMultiplierRef = useRef<number>(Math.random() * 0.5 + 1); // between 1 and 1.5
 
   useFrame(() => {
     if (alienRef.current && spaceshipRef.current) {
-      // Define the alien's sinusoidal motion.
-      const alienX = 250 * Math.sin(time) + 100; // Horizontal motion.
-      const alienZ = 100 * Math.cos(time) * Math.sin(time) + 10; // Forward motion.
-      const alienY = 50 * Math.sin(time) + 20; // Vertical motion.
+      // Randomized sinusoidal motions
+      const alienX =
+        250 * Math.sin(time * frequencyMultiplierRef.current) +
+        100 +
+        50 * Math.sin(time * 2 * frequencyMultiplierRef.current);
+      const alienZ =
+        100 * Math.cos(time) * Math.sin(time * magnitudeMultiplierRef.current) +
+        10 +
+        50 * Math.sin(time * 3 * frequencyMultiplierRef.current);
+      const alienY = 50 * Math.sin(time + Math.PI / 4) + 20; // A phase shift added here
 
       alienRef.current.position.set(alienX, alienY, alienZ);
 
+      // ... (rest of the code remains unchanged)
       // Chase logic: Spaceship moves towards alien's position.
       const direction = new THREE.Vector3().subVectors(
         alienRef.current.position,
@@ -174,14 +185,20 @@ const AnimatedPersecution: React.FC = () => {
       );
 
       direction.normalize();
-      const chaseSpeed = 0.75; // Adjusted for the spaceship's chasing speed.
+      const chaseSpeed = 0.5; // Adjusted for the spaceship's chasing speed.
       direction.multiplyScalar(chaseSpeed);
       spaceshipRef.current.position.add(direction);
 
       // Make the spaceship look at the alien's position.
       spaceshipRef.current.lookAt(alienRef.current.position);
 
-      // Update time for next frame.
+      // Randomly change parameters every few seconds
+      if (time % 5 < 0.005) {
+        // roughly every 5 seconds, adjust based on your frame rate
+        frequencyMultiplierRef.current = Math.random() * 0.5 + 0.5;
+        magnitudeMultiplierRef.current = Math.random() * 0.5 + 1;
+      }
+
       time += 0.005;
     }
   });
