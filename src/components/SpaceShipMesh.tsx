@@ -42,7 +42,6 @@ export const SpaceshipMesh = forwardRef(
       <group {...props} dispose={null}>
         <group
           ref={ref as React.Ref<THREE.Group>}
-          position={[198.694, 43.073, 44.939]}
           rotation={[-Math.PI / 2, Math.PI, 0]}
           scale={[0.003, 0.003, 0.003]}
         >

@@ -4,11 +4,13 @@ import { TextureLoader } from "three";
 import { useLoader } from "@react-three/fiber";
 import { Planet } from "./Planet";
 import { textureUris } from "../constants";
-import { OrbitControls, Stars } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera, Stars } from "@react-three/drei";
 import { LegoRing } from "./LegoRing";
 import * as THREE from "three";
 import { Group } from "three/src/objects/Group.js";
 import { Sun } from "./Sun";
+import { SpaceshipMesh } from "./SpaceShipMesh";
+import { Alien } from "./Alien";
 
 type TPlanetData = {
   name: string;
@@ -150,6 +152,56 @@ const AnimatedPlanet: React.FC<PlanetProps> = ({
     </group>
   );
 };
+const AnimatedPersecution: React.FC = () => {
+  const alienRef = useRef<THREE.Group>(null);
+  const spaceshipRef = useRef<THREE.Group>(null);
+
+  let time = 0;
+
+  useFrame(() => {
+    if (alienRef.current && spaceshipRef.current) {
+      // Define the alien's sinusoidal motion.
+      const alienX = 100 * Math.sin(time) + 100; // Horizontal motion.
+      const alienZ = 50 * Math.cos(time) * Math.sin(time) + 10; // Forward motion.
+      const alienY = 10 * Math.sin(time) + 20; // Vertical motion.
+
+      alienRef.current.position.set(alienX, alienY, alienZ);
+
+      // Chase logic: Spaceship moves towards alien's position.
+      const direction = new THREE.Vector3().subVectors(
+        alienRef.current.position,
+        spaceshipRef.current.position
+      );
+
+      direction.normalize();
+      const chaseSpeed = 0.3; // Adjusted for the spaceship's chasing speed.
+      direction.multiplyScalar(chaseSpeed);
+      spaceshipRef.current.position.add(direction);
+
+      // Make the spaceship look at the alien's position.
+      spaceshipRef.current.lookAt(alienRef.current.position);
+
+      // Update time for next frame.
+      time += 0.005;
+    }
+  });
+
+  return (
+    <group>
+      <group ref={alienRef}>
+        <Alien
+          handleAlienHit={() => {
+            console.log("Alien hit!");
+          }}
+          scale={[0.25, 0.25, 0.25]}
+        />
+      </group>
+      <group ref={spaceshipRef}>
+        <SpaceshipMesh rotation={[-Math.PI, 0, Math.PI]} scale={[5, 5, 5]} />
+      </group>
+    </group>
+  );
+};
 
 export const SolarSystem: React.FC = () => {
   const textures = useLoader(
@@ -163,7 +215,8 @@ export const SolarSystem: React.FC = () => {
         cursor: "grab",
       }}
     >
-      <group scale={[0.025, 0.025, 0.025]}>
+      <PerspectiveCamera makeDefault position={[0, 5, 50]} />
+      <group scale={[0.25, 0.25, 0.25]}>
         <LegoRing
           scale={[2.5, 2.5, 2.5]}
           amount={50}
@@ -178,9 +231,7 @@ export const SolarSystem: React.FC = () => {
           factor={0.01}
           saturation={0}
         />
-        {
-          //sun
-        }
+
         <Sun />
         {planetData.map((planet, index) => {
           return (
@@ -192,6 +243,7 @@ export const SolarSystem: React.FC = () => {
           );
         })}
       </group>
+      <AnimatedPersecution />
 
       <OrbitControls />
     </Canvas>
