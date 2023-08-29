@@ -21,7 +21,7 @@ type TPlanetData = {
   textureUri: string;
 };
 
-const orbitBrake = 4;
+const orbitBrake = 8;
 const planetData: TPlanetData[] = [
   {
     name: "mercury",
@@ -194,11 +194,11 @@ const AnimatedPersecution: React.FC = () => {
           handleAlienHit={() => {
             console.log("Alien hit!");
           }}
-          scale={[0.25, 0.25, 0.25]}
+          scale={[0.5, 0.5, 0.5]}
         />
       </group>
       <group ref={spaceshipRef}>
-        <SpaceshipMesh rotation={[-Math.PI, 0, Math.PI]} scale={[5, 5, 5]} />
+        <SpaceshipMesh rotation={[-Math.PI, 0, Math.PI]} scale={[10, 10, 10]} />
       </group>
     </group>
   );
@@ -217,7 +217,7 @@ export const SolarSystem: React.FC = () => {
       }}
     >
       <PerspectiveCamera makeDefault position={[-60, 8, -13]} />
-      <group scale={[0.25, 0.25, 0.25]}>
+      <group scale={[0.45, 0.45, 0.45]}>
         <LegoRing
           scale={[2.5, 2.5, 2.5]}
           amount={50}
