@@ -158,7 +158,8 @@ const AnimatedPersecution: React.FC = () => {
 
   let time = 0;
 
-  useFrame(() => {
+  useFrame(({ camera }) => {
+    console.log(camera.position);
     if (alienRef.current && spaceshipRef.current) {
       // Define the alien's sinusoidal motion.
       const alienX = 250 * Math.sin(time) + 100; // Horizontal motion.
@@ -215,7 +216,7 @@ export const SolarSystem: React.FC = () => {
         cursor: "grab",
       }}
     >
-      <PerspectiveCamera makeDefault position={[0, 5, 50]} />
+      <PerspectiveCamera makeDefault position={[-60, 8, -13]} />
       <group scale={[0.25, 0.25, 0.25]}>
         <LegoRing
           scale={[2.5, 2.5, 2.5]}
