@@ -19,7 +19,7 @@ export const Sun = () => {
       <Sparkles speed={0.5} scale={[40, 40, 40]} size={20} count={25} />
       <pointLight
         position={[0, 35, 0]}
-        intensity={0.5}
+        intensity={3}
         distance={1000}
         ref={lightRef}
       />
