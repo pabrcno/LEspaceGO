@@ -1,4 +1,4 @@
-# LESpaceGO
+# LEspaceGO
 A OGEL spatial adventure.
 Three.js Journey challenge #2.
 ## Notes:
