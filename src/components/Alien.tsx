@@ -13,12 +13,10 @@ import { LegoRing } from "./LegoRing";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Object_1: THREE.Mesh;
     Object_1_1: THREE.Mesh;
     Object_1_2: THREE.Mesh;
   };
   materials: {
-    DarkMetal: THREE.MeshStandardMaterial;
     LightMEtal: THREE.MeshStandardMaterial;
     Glass: THREE.MeshStandardMaterial;
   };
@@ -78,10 +76,6 @@ export function Alien(
   return (
     <group {...props} dispose={null} ref={alienRef as React.Ref<THREE.Group>}>
       <a.group scale={alienScale as unknown as THREE.Vector3}>
-        <mesh
-          geometry={nodes.Object_1.geometry}
-          material={materials.DarkMetal}
-        />
         <mesh
           geometry={nodes.Object_1_1.geometry}
           material={materials.LightMEtal}
