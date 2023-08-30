@@ -41,34 +41,35 @@ export function Alien(
     // If already hit, no need to check further
     if (isHit) return;
 
-    if (alienRef.current) {
-      const lasers = scene.children.filter((child) => child.name === "laser"); // Name your lasers 'laser' when creating them for easy filtering
-      for (const laser of lasers) {
-        raycaster.set(laser.position, new THREE.Vector3(0, 0, -1));
-        const intersects = raycaster.intersectObject(alienRef.current, true); // true checks all children of the group
-        if (intersects.length > 0 && intersects[0].distance < 0.1) {
-          explosionAudio.play().catch((err) => console.error(err));
-          setIsHit(true);
+    if (!alienRef.current) return;
+    const lasers = scene.children.filter((child) => child.name === "laser"); // Name your lasers 'laser' when creating them for easy filtering
+    if (lasers.length === 0) return;
 
-          scene.remove(laser);
+    for (const laser of lasers) {
+      raycaster.set(laser.position, new THREE.Vector3(0, 0, -1));
+      const intersects = raycaster.intersectObject(alienRef.current, true); // true checks all children of the group
+      if (intersects.length > 0 && intersects[0].distance < 0.1) {
+        explosionAudio.play().catch((err) => console.error(err));
+        setIsHit(true);
 
-          props.handleAlienHit();
-          setTimeout(() => {
-            if (!alienRef.current) return;
+        scene.remove(laser);
 
-            alienRef.current.visible = false;
-            alienRef.current.position.set(0, 0, camera.position.z - 40);
-          }, 2000);
+        props.handleAlienHit();
+        setTimeout(() => {
+          if (!alienRef.current) return;
 
-          setTimeout(() => {
-            if (!alienRef.current) return;
+          alienRef.current.visible = false;
+          alienRef.current.position.set(0, 0, camera.position.z - 40);
+        }, 2000);
 
-            alienRef.current.visible = true;
-            setIsHit(false);
-          }, 2500);
+        setTimeout(() => {
+          if (!alienRef.current) return;
 
-          break;
-        }
+          alienRef.current.visible = true;
+          setIsHit(false);
+        }, 2500);
+
+        break;
       }
     }
   });
@@ -97,5 +98,3 @@ export function Alien(
     </group>
   );
 }
-
-useGLTF.preload("/alien.glb");
