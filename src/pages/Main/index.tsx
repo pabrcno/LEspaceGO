@@ -167,7 +167,7 @@ export const MainScreen = () => {
           </Suspense>
 
           <audio ref={audioRef} loop>
-            <source src="/background.wav" type="audio/mpeg" />
+            <source src="/background.mp3" type="audio/mpeg" />
           </audio>
         </>
       }
