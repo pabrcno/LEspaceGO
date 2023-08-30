@@ -1,7 +1,7 @@
 import { Background } from "../../components/Background";
 import { Canvas } from "@react-three/fiber";
 
-import { Loader } from "@react-three/drei";
+import { Loader, Stats } from "@react-three/drei";
 
 import { ScreenContainer } from "../../styles/general.styles";
 import { useLoader } from "@react-three/fiber";
@@ -61,7 +61,7 @@ export const MainScreen = () => {
     shadowColor,
   } = {
     bgMeshScale: 0.1,
-    bgMeshFactor: 15,
+    bgMeshFactor: 12,
     innerGradientColor: theme.innerGradientColor,
     outerGradientColor: theme.outerGradientColor,
     shadowColor: theme.shadowColor,
@@ -102,6 +102,7 @@ export const MainScreen = () => {
       {
         <>
           <Loader />
+          <Stats />
 
           <Suspense fallback={null}>
             <Canvas
@@ -148,7 +149,7 @@ export const MainScreen = () => {
                     />
                   )),
 
-                  ...Array.from({ length: 15 }, (_, factorIndex) => (
+                  ...Array.from({ length: 10 }, (_, factorIndex) => (
                     <Alien
                       key={`${factorIndex}-alien`}
                       scale={bgMeshScale * 1.5}
