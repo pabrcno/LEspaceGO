@@ -75,7 +75,7 @@ export const useAutoZScrolling = (deactivateScroll?: boolean) => {
   }, [setSpeed]);
   // Define base and max FOV values
   const baseFOV = 50; // Default camera FOV (for example, THREE.PerspectiveCamera's default is 50)
-  const maxFOV = 350; // Maximum FOV when at maximum speed
+  const maxFOV = 250; // Maximum FOV when at maximum speed
 
   useFrame(() => {
     if (deactivateScroll) return;
