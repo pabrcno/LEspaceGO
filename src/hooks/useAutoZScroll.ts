@@ -18,7 +18,7 @@ export const useAutoZScrolling = (deactivateScroll?: boolean) => {
 
     // Update camera position with the current animated speed
     lastY.current -= speed.get();
-    camera.position.z = lastY.current + 8;
+    camera.position.z = lastY.current + 6;
   });
   const speedAudio = useMemo(() => new Audio("/speed.mp3"), []);
   const [played, setPlayed] = useState(false);
@@ -75,14 +75,14 @@ export const useAutoZScrolling = (deactivateScroll?: boolean) => {
   }, [setSpeed]);
   // Define base and max FOV values
   const baseFOV = 50; // Default camera FOV (for example, THREE.PerspectiveCamera's default is 50)
-  const maxFOV = 120; // Maximum FOV when at maximum speed
+  const maxFOV = 250; // Maximum FOV when at maximum speed
 
   useFrame(() => {
     if (deactivateScroll) return;
 
     // Update camera position with the current animated speed
     lastY.current -= speed.get();
-    camera.position.z = lastY.current + 4;
+    camera.position.z = lastY.current + 12;
 
     if (camera instanceof PerspectiveCamera) {
       const currentSpeed = speed.get();
