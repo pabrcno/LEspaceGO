@@ -232,7 +232,7 @@ export const SolarSystem: React.FC = () => {
         cursor: "grab",
       }}
     >
-      <PerspectiveCamera makeDefault position={[-60, 8, -40]} />
+      <PerspectiveCamera makeDefault position={[-60, 12, -80]}  rotation={[-Math.PI / 4, -Math.PI / 6, 0]}/>
       <group scale={[0.45, 0.45, 0.45]}>
         <LegoRing
           scale={[2.5, 2.5, 2.5]}
