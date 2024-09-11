@@ -171,6 +171,21 @@ export const MainScreen = () => {
           </audio>
         </>
       }
+       <div
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "20px",
+              color: "white",
+              background: "rgba(0, 0, 0, 0.5)",
+              padding: "10px",
+              borderRadius: "8px",
+              fontSize: "18px",
+              zIndex: 100,
+            }}
+          >
+            Aliens killed: {alienCountRef.current}
+          </div>
     </ScreenContainer>
   );
 };
