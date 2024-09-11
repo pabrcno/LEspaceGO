@@ -18,7 +18,7 @@ export const useAutoZScrolling = (deactivateScroll?: boolean) => {
 
     // Update camera position with the current animated speed
     lastY.current -= speed.get();
-    camera.position.z = lastY.current + 4;
+    camera.position.z = lastY.current + 8;
   });
   const speedAudio = useMemo(() => new Audio("/speed.mp3"), []);
   const [played, setPlayed] = useState(false);
@@ -38,7 +38,7 @@ export const useAutoZScrolling = (deactivateScroll?: boolean) => {
       }
 
       // Set the spring to the faster speed
-      setSpeed({ speed: 0.6 });
+      setSpeed({ speed: 0.1 });
     }, 200);
 
     const onKeyDown = (e: KeyboardEvent) => {

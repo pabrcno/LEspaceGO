@@ -182,6 +182,7 @@ export const MainScreen = () => {
               borderRadius: "8px",
               fontSize: "18px",
               zIndex: 100,
+              userSelect: "none"
             }}
           >
             Aliens killed: {alienCountRef.current}
