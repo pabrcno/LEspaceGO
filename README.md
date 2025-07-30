@@ -1,5 +1,5 @@
 # LEspaceGO
-A OGEL spatial adventure.
+A LEGO spatial adventure.
 Three.js Journey challenge #2.
 ## Notes:
 - I was going to do a [realistic not-lego set](https://github.com/pabrcno/not-lego) but I failed.
